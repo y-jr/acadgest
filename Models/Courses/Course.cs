@@ -8,8 +8,8 @@ namespace acadgest.Models.Courses
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         // Navigations props
-        public Guid CoordenationId { get; set; }
-        public Coordenation Coordenation { get; set; } = new Coordenation();
+        public Guid? CoordenationId { get; set; }
+        public Coordenation? Coordenation { get; set; } = new Coordenation();
         public ICollection<Class>? Classes { get; set; }
     }
 }

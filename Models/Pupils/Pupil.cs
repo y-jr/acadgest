@@ -9,8 +9,8 @@ namespace acadgest.Models.Pupils
         public DateTime? DateOfBirth { get; set; }
         public string? Gender { get; set; }
         // Navigation props
-        public Guid ClassId { get; set; }
-        public Class Class { get; set; } = null!;
+        public Guid? ClassId { get; set; }
+        public Class? Class { get; set; } = null!;
 
     }
 }

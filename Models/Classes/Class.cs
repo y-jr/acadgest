@@ -1,6 +1,7 @@
 using acadgest.Models.Coordenations;
 using acadgest.Models.Courses;
 using acadgest.Models.Pupils;
+using acadgest.Models.User;
 
 namespace acadgest.Models.Classes
 {
@@ -11,9 +12,12 @@ namespace acadgest.Models.Classes
         public string Grade { get; set; } = string.Empty;
         public string Classroom { get; set; } = string.Empty;
         // Navigation props
-        public Guid CoordenationId { get; set; }
+
+        public Guid? ClassDirectorId { get; set; }
+        public AppUser? ClassDirector { get; set; }
+        public Guid? CoordenationId { get; set; }
         public Coordenation? Coordenation { get; set; }
-        public Guid CourseId { get; set; }
+        public Guid? CourseId { get; set; }
         public Course? Course { get; set; }
         public ICollection<Pupil>? pupils { get; set; }
 

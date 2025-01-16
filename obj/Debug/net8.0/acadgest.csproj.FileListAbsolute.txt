@@ -263,3 +263,4 @@ C:\DOCS\study\Programação\C\C#\acadgest\bin\Debug\net8.0\runtimes\win\lib\net7
 C:\DOCS\study\Programação\C\C#\acadgest\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 C:\DOCS\study\Programação\C\C#\acadgest\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.UI.dll
 C:\DOCS\study\Programação\C\C#\acadgest\obj\Debug\net8.0\acadgest.MvcApplicationPartsAssemblyInfo.cs
+C:\DOCS\study\Programação\C\C#\acadgest\obj\Debug\net8.0\acadgest.sourcelink.json
