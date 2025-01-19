@@ -8,6 +8,8 @@ namespace acadgest.Models.User
     public class EditUserViewModel
     {
         public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string IdNumber { get; set; } = string.Empty;
         public string UserName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public bool EmailConfirmed { get; set; }

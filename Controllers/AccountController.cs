@@ -51,6 +51,8 @@ public class AccountController : Controller
         {
             Id = user.Id,
             UserName = user.UserName!,
+            Name = user.Name!,
+            IdNumber = user.IdNumber!,
             Email = user.Email!,
             EmailConfirmed = user.EmailConfirmed
         };

@@ -17,6 +17,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th>Nome completo</th>
             <th>Nome de Usuário</th>
             <th>Email</th>
             <th>Ações</th>
@@ -26,6 +27,7 @@
         @foreach (var user in Model)
         {
             <tr>
+                <td>@user.Name</td>
                 <td>@user.UserName</td>
                 <td>@user.Email</td>
                 <td>

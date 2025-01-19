@@ -24,7 +24,9 @@ builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(options =>
 // Configurar o MVC
 builder.Services.AddControllersWithViews();
 
+// Mapeando as interfaces
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<ICoordenationRepository, CoordenationRepository>();
 
 var app = builder.Build();
 
@@ -53,7 +55,7 @@ using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
-    string[] roles = { "Admin", "User" };
+    string[] roles = { "Admin", "User" ,"Coordinator", "Classdirector"};
 
     foreach (var role in roles)
     {

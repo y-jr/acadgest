@@ -1,0 +1,119 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using acadgest.Dto.Coordenation;
+using acadgest.Interface;
+using acadgest.Models.Coordenations;
+using acadgest.Models.Results;
+using acadgest.Models.User;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+namespace acadgest.Data.Repository
+{
+    public class CoordenationRepository : ICoordenationRepository
+    {
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        public CoordenationRepository(ApplicationDbContext context, UserManager<AppUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
+        public async Task<Coordenation?> CreateAsync(Coordenation coordenationModel)
+        {
+
+            await _context.Coordenations.AddAsync(coordenationModel);
+            await _context.SaveChangesAsync();
+            return coordenationModel;
+        }
+
+        public async Task<DeleteResults> DeleteAsync(Guid id)
+        {
+            var result = new DeleteResults
+            {
+                DeleteSucceded = false
+            };
+            var coordenation = await _context.Coordenations.FirstOrDefaultAsync(c => c.Id == id);
+            if (coordenation == null) result.Error = "Coordenação não encontrada";
+            else
+            {
+                _context.Coordenations.Remove(coordenation);
+                await _context.SaveChangesAsync();
+                result.DeleteSucceded = true;
+            }
+
+            return result;
+        }
+
+        public Task<bool> ExistsAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Coordenation>> GetAllAsync()
+        {
+            return await _context.Coordenations
+                .Include(c => c.Coordinator)
+                .ToListAsync();
+        }
+
+        public async Task<Coordenation?> GetByIdAsync(Guid id)
+        {
+            var coordenation = await _context.Coordenations
+                .Include(c => c.Coordinator).FirstOrDefaultAsync(c => c.Id == id);
+            return coordenation;
+        }
+
+        public async Task<SetCoordinatorResult> SetCoordinator(Guid coordenationId, Guid coordinatorId)
+        {
+            var result = new SetCoordinatorResult
+            {
+                Succeeded = false
+            };
+            var model = await _context.Coordenations.FindAsync(coordenationId);
+            if (model == null) result.Error = "Coordenação não encontrada";
+            else
+            {
+                // Verifica se já tem um coordenador
+                var oldCoordinatorId = model.CoordinatorId;
+                if (oldCoordinatorId != Guid.Empty)
+                {
+                    // Pega o antigo coordenador
+                    var oldCoordinator = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == oldCoordinatorId);
+                    if (oldCoordinator != null)
+                    {
+                        var roles = await _userManager.GetRolesAsync(oldCoordinator);
+                        if (roles.Contains("Coordinator"))
+                        {
+                            await _userManager.RemoveFromRoleAsync(oldCoordinator, "Coordinator");
+                        }
+                    }
+                }
+
+                // Adicionar a role "Coordinator" ao novo
+                var newCoordinator = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == coordinatorId);
+                if (newCoordinator != null)
+                {
+                    await _userManager.AddToRoleAsync(newCoordinator, "Coordinator");
+                    model.CoordinatorId = coordinatorId;
+                    result.Succeeded = true;
+                }
+                else result.Error = "Usuário não encontrado";
+            }
+
+            await _context.SaveChangesAsync();
+            return result;
+        }
+
+        public async Task<Coordenation?> UpdateAsync(Guid id, UpdateCoordenationDto dto)
+        {
+            var coordenation = await _context.Coordenations.FindAsync(id);
+            if (coordenation == null) return null;
+            coordenation.Name = dto.Name;
+            await _context.SaveChangesAsync();
+            return coordenation;
+        }
+    }
+}

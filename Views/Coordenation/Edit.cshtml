@@ -1,0 +1,13 @@
+@model acadgest.Dto.Coordenation.UpdateCoordenationDto
+
+<h2>Editar coordenação @Model.Name</h2>
+<form asp-controller="Coordenation" asp-action="Update" asp-route-id="@ViewData["id"]" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Nome da coordenação</label>
+        <input type="text" asp-for="Name" class="form-control">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn my-2 btn-primary">Atualizar</button>
+</form>
+
+

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using acadgest.Interface;
 using acadgest.Models.Results;
 using acadgest.Models.User;
@@ -93,6 +89,8 @@ namespace acadgest.Data.Repository
 
             // Atualiza os campos do usuário
             user.UserName = model.UserName;
+            user.Name = model.Name;
+            user.IdNumber = model.IdNumber;
             user.Email = model.Email;
 
             // Atualiza o usuário no banco de dados
@@ -155,7 +153,13 @@ namespace acadgest.Data.Repository
         public async Task<RegisterResults> RegisterAsync(RegisterViewModel model)
         {
             var registerResults = new RegisterResults();
-            var user = new AppUser { UserName = model.Username, Email = model.Email };
+            var user = new AppUser
+            {
+                UserName = model.UserName,
+                Name = model.Name,
+                IdNumber = model.IdNumber,
+                Email = model.Email
+            };
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
