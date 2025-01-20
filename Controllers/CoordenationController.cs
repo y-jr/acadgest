@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using acadgest.Dto.Class;
 using acadgest.Dto.Coordenation;
 using acadgest.Interface;
 using acadgest.Mappers;
@@ -21,9 +22,12 @@ namespace acadgest.Controllers
             _coordenationRepo = coordenationRepo;
         }
 
-        public IActionResult Index()
+        [Route("{id}")]
+        public IActionResult Index([FromRoute] Guid id)
         {
-            return View();
+            ViewData["coord"] = id;
+            ICollection<ClassDetailsDto> classDetails = new List<ClassDetailsDto>();
+            return View(classDetails);
         }
         [Route("all")]
         [HttpPost]

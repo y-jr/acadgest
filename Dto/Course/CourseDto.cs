@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace acadgest.Dto.Coordenation
+namespace acadgest.Dto.Course
 {
-    public class CoordenationDto
+    public class CourseDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string? CoordinatorName { get; set; } = string.Empty;
     }
 }

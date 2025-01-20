@@ -1,27 +1,21 @@
-using acadgest.Models.Coordenations;
-using acadgest.Models.Courses;
-using acadgest.Models.Pupils;
-using acadgest.Models.User;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace acadgest.Models.Classes
+namespace acadgest.Dto.Class
 {
-    public class Class
+    public class CreateClassDto
     {
+
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Grade { get; set; } = string.Empty;
         public string? Classroom { get; set; } = string.Empty;
         public string? Obs { get; set; } = string.Empty;
         // Navigation props
-
         public Guid? ClassDirectorId { get; set; }
-        public AppUser? ClassDirector { get; set; }
         public Guid? CoordenationId { get; set; }
-        public Coordenation? Coordenation { get; set; }
         public Guid? CourseId { get; set; }
-        public Course? Course { get; set; }
-        public ICollection<Pupil>? pupils { get; set; }
-
-
     }
 }

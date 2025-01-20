@@ -15,11 +15,11 @@ namespace acadgest.Models.User
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        public string IdNumber { get; set; } = string.Empty;
+        public string? IdNumber { get; set; } = string.Empty;
 
         [Required]
         [EmailAddress]
-        public string Email { get; set; } = string.Empty;
+        public string? Email { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]

@@ -1,7 +1,46 @@
+@model IEnumerable<acadgest.Dto.Class.ClassDetailsDto>
+
 @{
-    ViewData["Title"] = "Coordenation";
+    ViewData["Title"] = "Coordenação";
 }
 
 <div class="text-center">
-    <h1 class="display-4">COORDENAÇÕES ACADGEST</h1>
+    <h1 class="display-4">Coordenação</h1>
+    <a class="btn-primary p-0 pt-2 rounded text-decoration-none" asp-route-id="@ViewData["coord"]" asp-controller="Class" asp-action="NewClass"
+        role="button"><b class="fs-1">+</b></a> Nova Turma
+</div>
+
+<div class="row">
+
+    @foreach (var cord in Model)
+    {
+        <div class="card m-2 col-4">
+            <div class="card-body">
+                <h5 class="card-title">10ª B - Inforgest</h5>
+
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="card-text">Adilson Muieba</p>
+                    </div>
+                    <a asp-controller="Admin" asp-action="EditCoordinator" asp-route-id="id"
+                        class="btn btn-secondary">Set</a>
+                </div>
+
+            </div>
+            <div class="card-body d-flex justify-content-around">
+                <form asp-controller="Coordenation" asp-action="Delete" asp-route-id="id" method="post"
+                    style="display:inline;">
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Deletar</button>
+                </form>
+                <a asp-controller="Coordenation" asp-action="Edit" asp-route-id="id"
+                    class="btn btn-warning">Editar</a>
+                <a asp-controller="Coordenation" asp-action="Index" asp-route-id="id"
+                    class="btn btn-primary">Acessar</a>
+            </div>
+        </div>
+
+    }
+
+
 </div>

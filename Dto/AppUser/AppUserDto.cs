@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace acadgest.Models.User
+namespace acadgest.Dto.AppUser
 {
-    public class EditUserViewModel
+    public class AppUserDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? IdNumber { get; set; } = string.Empty;
-        public string UserName { get; set; } = null!;
-        public string? Email { get; set; } = null!;
-        public bool EmailConfirmed { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string? Email { get; set; } = string.Empty;
+
     }
 }

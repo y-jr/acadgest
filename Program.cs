@@ -27,6 +27,8 @@ builder.Services.AddControllersWithViews();
 // Mapeando as interfaces
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<ICoordenationRepository, CoordenationRepository>();
+builder.Services.AddScoped<IClassRepository, ClassRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 
 var app = builder.Build();
 
@@ -55,7 +57,7 @@ using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
-    string[] roles = { "Admin", "User" ,"Coordinator", "Classdirector"};
+    string[] roles = { "Admin", "User", "Coordinator", "Classdirector" };
 
     foreach (var role in roles)
     {
