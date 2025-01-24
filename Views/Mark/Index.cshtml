@@ -1,0 +1,46 @@
+@model acadgest.Dto.Class.ClassMiniPauta
+<h1>Minipautas de @Model.Name</h1>
+<a asp-controller="Mark" asp-action="AddMiniPauta" asp-route-id="@Model.Id">
+    <button class="btn btn-primary">Editar</button>
+</a>
+<table class="table table-striped text-center">
+    <thead>
+        <th>Nome</th>
+        <th>Gênero</th>
+        <th>MAC</th>
+        <th>PP</th>
+        <th>PT</th>
+        <th>MT</th>
+        <th>Estado</th>
+        <th>OBS</th>
+    </thead>
+    <tbody>
+        @foreach (var miniPauta in Model.MiniPautas)
+        {
+            <tr>
+                <td>@miniPauta.PupilName</td>
+                @if (miniPauta.PupilGender == "F")
+                {
+                    <td class="text-center bg-female">Feminino</td>
+                }
+                else
+                {
+                    <td class="text-center bg-male">Masculino</td>
+                }
+                <td>@miniPauta.Mac.ToString("0.0")</td>
+                <td>@miniPauta.Pp.ToString("0.0")</td>
+                <td>@miniPauta.Pt.ToString("0.0")</td>
+                <td>@miniPauta.Mt.ToString("0.0")</td>
+
+                @if (miniPauta.Status == "Reprovado")
+                {
+                    <td class="bg-danger">@miniPauta.Status</td>
+                }
+                else
+                {
+                    <td class="bg-success">@miniPauta.Status</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

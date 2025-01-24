@@ -4,6 +4,7 @@ using acadgest.Interface;
 using acadgest.Models.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,9 +30,12 @@ builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<ICoordenationRepository, CoordenationRepository>();
 builder.Services.AddScoped<IClassRepository, ClassRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IPupilRepository, PupilRepository>();
+builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
+builder.Services.AddScoped<IMarkRepository, MarkRepository>();
 
 var app = builder.Build();
-
+QuestPDF.Settings.License = LicenseType.Community;
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -68,5 +72,5 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-
+// Rotativa
 app.Run();

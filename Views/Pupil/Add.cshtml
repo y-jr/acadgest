@@ -1,0 +1,11 @@
+@model acadgest.Dto.Pupil.AddPupilDto
+
+<h2>Adicionar alunos</h2>
+<form asp-controller="Pupil" asp-action="Create" asp-route-id="@Model" method="post">
+    <input type="hidden" asp-for="TurmaId" class="form-control">
+    <div class="form-group">
+        <label asp-for="Alunos">Lista de alunos</label>
+        <textarea asp-for="Alunos" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn my-2 btn-primary">Adicionar</button>
+</form>

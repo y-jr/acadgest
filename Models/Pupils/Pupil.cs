@@ -11,6 +11,7 @@ namespace acadgest.Models.Pupils
         // Navigation props
         public Guid? ClassId { get; set; }
         public Class? Class { get; set; } = null!;
+        public ICollection<Mark>? Marks { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@ using acadgest.Models.Classes;
 using acadgest.Models.Coordenations;
 using acadgest.Models.Courses;
 using acadgest.Models.Pupils;
+using acadgest.Models.Subjects;
 using acadgest.Models.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -61,6 +62,18 @@ namespace acadgest.Data
                                 .WithOne(p => p.Class)
                                 .HasForeignKey(p => p.ClassId)
                                 .OnDelete(DeleteBehavior.SetNull);
+                        // Cadeiras da turma
+                        builder.Entity<Class>()
+                                .HasMany(c => c.Subjects)
+                                .WithOne(s => s.Class)
+                                .HasForeignKey(s => s.ClassId)
+                                .OnDelete(DeleteBehavior.SetNull);
+                        // Notas do aluno
+                        builder.Entity<Pupil>()
+                                .HasMany(p => p.Marks)
+                                .WithOne(m => m.Pupil)
+                                .HasForeignKey(m => m.PupilId)
+                                .OnDelete(DeleteBehavior.Cascade);
 
                 }
 
@@ -68,6 +81,8 @@ namespace acadgest.Data
                 public DbSet<Course> Courses { get; set; }
                 public DbSet<Class> Classes { get; set; }
                 public DbSet<Pupil> Pupils { get; set; }
+                public DbSet<Subject> Subjects { get; set; }
+                public DbSet<Mark> Marks { get; set; }
 
         }
 }

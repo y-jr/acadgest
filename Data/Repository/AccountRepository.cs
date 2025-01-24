@@ -131,9 +131,23 @@ namespace acadgest.Data.Repository
                 loginViewModel.RememberMe,
                 lockoutOnFailure: true
             );
+            // Inicializa o usuário e as roles como nulos
+            AppUser? user = null;
+            List<string>? roles = null;
 
+            // Se o login for bem-sucedido, busca o usuário e suas roles
+            if (result.Succeeded)
+            {
+                user = await _userManager.FindByNameAsync(loginViewModel.Username);
+                if (user != null)
+                {
+                    roles = (await _userManager.GetRolesAsync(user)).ToList();
+                }
+            }
             return new LoginResults
             {
+                User = user,
+                Roles = roles,
                 Succeeded = result.Succeeded,
                 IsLockedOut = result.IsLockedOut,
                 IsNotAllowed = result.IsNotAllowed,

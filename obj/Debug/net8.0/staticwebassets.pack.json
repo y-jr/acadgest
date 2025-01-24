@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\wwwroot\\img\\fenda.jpg",
+      "PackagePath": "staticwebassets\\img\\fenda.jpg"
+    },
+    {
       "Id": "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -233,6 +233,40 @@ namespace acadgest.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("acadgest.Models.Pupils.Mark", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PupilId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Trimester")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
+
+                    b.Property<string>("test")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PupilId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Marks");
+                });
+
             modelBuilder.Entity("acadgest.Models.Pupils.Pupil", b =>
                 {
                     b.Property<Guid>("Id")
@@ -257,6 +291,29 @@ namespace acadgest.Migrations
                     b.HasIndex("ClassId");
 
                     b.ToTable("Pupils");
+                });
+
+            modelBuilder.Entity("acadgest.Models.Subjects.Subject", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ClassId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Grade")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("acadgest.Models.User.AppUser", b =>
@@ -427,6 +484,22 @@ namespace acadgest.Migrations
                     b.Navigation("Coordenation");
                 });
 
+            modelBuilder.Entity("acadgest.Models.Pupils.Mark", b =>
+                {
+                    b.HasOne("acadgest.Models.Pupils.Pupil", "Pupil")
+                        .WithMany("Marks")
+                        .HasForeignKey("PupilId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("acadgest.Models.Subjects.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId");
+
+                    b.Navigation("Pupil");
+
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("acadgest.Models.Pupils.Pupil", b =>
                 {
                     b.HasOne("acadgest.Models.Classes.Class", "Class")
@@ -437,8 +510,20 @@ namespace acadgest.Migrations
                     b.Navigation("Class");
                 });
 
+            modelBuilder.Entity("acadgest.Models.Subjects.Subject", b =>
+                {
+                    b.HasOne("acadgest.Models.Classes.Class", "Class")
+                        .WithMany("Subjects")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Class");
+                });
+
             modelBuilder.Entity("acadgest.Models.Classes.Class", b =>
                 {
+                    b.Navigation("Subjects");
+
                     b.Navigation("pupils");
                 });
 
@@ -452,6 +537,11 @@ namespace acadgest.Migrations
             modelBuilder.Entity("acadgest.Models.Courses.Course", b =>
                 {
                     b.Navigation("Classes");
+                });
+
+            modelBuilder.Entity("acadgest.Models.Pupils.Pupil", b =>
+                {
+                    b.Navigation("Marks");
                 });
 
             modelBuilder.Entity("acadgest.Models.User.AppUser", b =>

@@ -4,17 +4,12 @@
     ViewData["Title"] = "Admin";
 }
 
-<div class="text-center">
-    <h1 class="display-4">ADMIN</h1>
-    <a class="btn-primary p-0 pt-2 rounded text-decoration-none" asp-controller="Admin" asp-action="NewCoordenation"
-        role="button"><b class="fs-1">+</b></a>
-</div>
 
 <div class="row">
 
     @foreach (var cord in Model)
     {
-        <div class="card m-2 col-4">
+        <div class="card col-4 border border-primary">
             <div class="card-body">
                 <h5 class="card-title">@cord.Name.ToUpper()</h5>
 
@@ -45,11 +40,16 @@
                 </form>
                 <a asp-controller="Coordenation" asp-action="Edit" asp-route-id="@cord.Id"
                     class="btn btn-warning">Editar</a>
-                <a asp-controller="Coordenation" asp-action="Index" asp-route-id="@cord.Id" class="btn btn-primary">Acessar</a>
+                <a asp-controller="Coordenation" asp-action="Index" asp-route-id="@cord.Id"
+                    class="btn btn-primary">Acessar</a>
             </div>
         </div>
 
     }
+    <div class="card col-4 d-flex justify-content-center align-items-center border border-primary">
+        <a class="btn-primary rounded text-decoration-none" asp-controller="Admin" asp-action="NewCoordenation"
+            role="button"><b class="fs-1">+</b></a>
+    </div>
 
 
 </div>

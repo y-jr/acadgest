@@ -1,0 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using acadgest.Dto.Class;
+using acadgest.Dto.Mark;
+using acadgest.Dto.Pupil;
+
+namespace acadgest.Interface
+{
+    public interface IMarkRepository
+    {
+        public Task<ClassMiniPauta?> GetMiniAsync(Guid subjectId);
+        public Task<List<string>> AddAsync(CreateMiniPautaDto miniPautaDto);
+        public Task<BoletimDto?> BoletimAsync(Guid pupilId);
+    }
+}

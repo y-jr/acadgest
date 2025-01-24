@@ -1,0 +1,11 @@
+@model acadgest.Dto.Mark.CreateMiniPautaDto
+
+<h2>Adicionar miniPauta</h2>
+<form asp-controller="Mark" asp-action="Create" method="post">
+    <input type="hidden" asp-for="SubjectId">
+    <div class="form-group">
+        <label asp-for="MiniPauta">MiniPauta</label>
+        <textarea asp-for="MiniPauta" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn my-2 btn-primary">Adicionar</button>
+</form>

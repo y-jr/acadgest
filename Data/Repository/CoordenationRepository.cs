@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using acadgest.Dto.Class;
 using acadgest.Dto.Coordenation;
+using acadgest.Dto.Pupil;
 using acadgest.Interface;
+using acadgest.Mappers;
 using acadgest.Models.Coordenations;
 using acadgest.Models.Results;
 using acadgest.Models.User;
@@ -21,6 +24,75 @@ namespace acadgest.Data.Repository
             _context = context;
             _userManager = userManager;
         }
+
+        public async Task<List<ClassDetailsDto>?> ClassDetails(Guid cordId)
+        {
+            var turmas = new List<ClassDetailsDto>();
+            var classes = await _context.Classes
+                .Where(c => c.CoordenationId == cordId)
+                .Include(c => c.ClassDirector)
+                .Include(c => c.Course)
+                .Include(c => c.Subjects)
+                .Include(c => c.pupils).ToListAsync();
+
+            foreach (var turma in classes)
+            {
+                var newTurma = new ClassDetailsDto
+                {
+                    Id = turma.Id,
+                    Grade = turma.Grade,
+                    Course = turma.Course?.Name ?? "",
+                    Name = turma.Name,
+                    ClassDirector = turma.ClassDirector?.Name ?? ""
+                };
+                if (turma.Subjects == null) return null;
+                newTurma.Subjects = turma.Subjects.Select(s => s.ToSubjectDto()).ToList();
+                var pupils = await _context.Pupils.Where(p => p.ClassId == turma.Id).ToListAsync();
+                foreach (var pupil in pupils)
+                {
+                    var pauta = new Dto.Mark.MarksForCoordenationViewDto
+                    {
+                        PupilId = pupil.Id,
+                        PupilName = pupil.Name,
+                        PupilGender = pupil?.Gender ?? "M"
+                    };
+                    foreach (var subject in turma.Subjects)
+                    {
+                        var mac = await _context.Marks
+                                    .FirstOrDefaultAsync(m =>
+                                    m.PupilId == pupil.Id &&
+                                    m.SubjectId == subject.Id &&
+                                    m.Trimester == 1 &&
+                                    m.year == 2025 &&
+                                    m.test == "mac");
+                        float myMac = mac?.Value ?? 0;
+                        var pp = await _context.Marks
+                                    .FirstOrDefaultAsync(m =>
+                                    m.PupilId == pupil.Id &&
+                                    m.SubjectId == subject.Id &&
+                                    m.Trimester == 1 &&
+                                    m.year == 2025 &&
+                                    m.test == "pp");
+                        float myPp = pp?.Value ?? 0;
+                        var pt = await _context.Marks
+                                    .FirstOrDefaultAsync(m =>
+                                    m.PupilId == pupil.Id &&
+                                    m.SubjectId == subject.Id &&
+                                    m.Trimester == 1 &&
+                                    m.year == 2025 &&
+                                    m.test == "pt");
+                        float myPt = pt?.Value ?? 0;
+                        var mt = ((myMac + myPp + myPt) / 3);
+                        pauta.Marks.Add(mt);
+                    }
+                    newTurma.Pautas.Add(pauta);
+                }
+                turmas.Add(newTurma);
+            }
+
+            return turmas;
+        }
+
         public async Task<Coordenation?> CreateAsync(Coordenation coordenationModel)
         {
 

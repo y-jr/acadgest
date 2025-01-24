@@ -23,11 +23,11 @@ namespace acadgest.Controllers
         }
 
         [Route("{id}")]
-        public IActionResult Index([FromRoute] Guid id)
+        public async Task<IActionResult> Index([FromRoute] Guid id)
         {
             ViewData["coord"] = id;
-            ICollection<ClassDetailsDto> classDetails = new List<ClassDetailsDto>();
-            return View(classDetails);
+            var model = await _coordenationRepo.ClassDetails(id);
+            return View(model);
         }
         [Route("all")]
         [HttpPost]

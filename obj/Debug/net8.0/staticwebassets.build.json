@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HTCXEFDBF7FlrUYrgxrGgVqfLwGAmVG6gnqZqI2Zh+8=",
+  "Hash": "/+QCvHjKohjwKXuBLm3sF5AxtEboanyUE1NimZyBu7Y=",
   "Source": "acadgest",
   "BasePath": "_content/acadgest",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\wwwroot\\img\\fenda.jpg",
+      "SourceId": "acadgest",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\wwwroot\\",
+      "BasePath": "_content/acadgest",
+      "RelativePath": "img/fenda.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\fenda.jpg"
     },
     {
       "Identity": "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\wwwroot\\js\\site.js",
