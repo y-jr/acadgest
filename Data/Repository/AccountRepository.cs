@@ -139,11 +139,9 @@ namespace acadgest.Data.Repository
             if (result.Succeeded)
             {
                 user = await _userManager.FindByNameAsync(loginViewModel.Username);
-                if (user != null)
-                {
-                    roles = (await _userManager.GetRolesAsync(user)).ToList();
-                }
             }
+            if (user == null) return new LoginResults();
+            roles = (await _userManager.GetRolesAsync(user)).ToList();
             return new LoginResults
             {
                 User = user,

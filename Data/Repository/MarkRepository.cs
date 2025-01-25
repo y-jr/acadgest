@@ -205,5 +205,67 @@ namespace acadgest.Data.Repository
             }
             return boletim;
         }
+
+        public async Task<ClassBoletinsDto?> BoletinsAsync(Guid classId)
+        {
+            var classBoletins = new ClassBoletinsDto();
+            var turma = await _context.Classes
+                .Include(t => t.ClassDirector)
+                .Include(t => t.Course)
+                .Include(t => t.Subjects) // Inclui os Subjects relacionados
+                .FirstOrDefaultAsync(t => t.Id == classId); // Filtra pelo ClassId
+            if (turma == null) return null;
+            if (turma.Subjects == null) return null;
+
+            classBoletins.ClassDirectorName = turma.ClassDirector?.Name ?? "";
+            var marks = await _context.Marks.Where(m => m.year == 2025 && m.Trimester == 1).ToListAsync();
+
+            var pupils = await _context.Pupils.Where(p => p.ClassId == classId).ToListAsync();
+            if (pupils == null) return null;
+
+            foreach (var pupil in pupils)
+            {
+                var newBoletim = new BoletimDto();
+                newBoletim.PupilName = pupil.Name; // Nome do aluno
+                newBoletim.ClassDirectorName = turma.ClassDirector?.Name ?? "Adelson Matari"; // Nome do diretor de turma
+                newBoletim.ClassName = $"{turma.Name} - {turma.Course?.Name}"; // Nome da turma
+                foreach (var subject in turma.Subjects)
+                {
+                    var mac = marks.FirstOrDefault(m =>
+                    m.PupilId == pupil.Id &&
+                    m.SubjectId == subject.Id &&
+                    m.test == "mac"
+                    );
+                    float myMac = mac?.Value ?? 0;
+                    var pp = marks.FirstOrDefault(m =>
+                    m.PupilId == pupil.Id &&
+                    m.SubjectId == subject.Id &&
+                    m.test == "pp"
+                    );
+                    float myPp = pp?.Value ?? 0;
+                    var pt = marks.FirstOrDefault(m =>
+                    m.PupilId == pupil.Id &&
+                    m.SubjectId == subject.Id &&
+                    m.test == "pt"
+                    );
+                    float myPt = pt?.Value ?? 0;
+
+                    var newMark = new BoletimMarkDto
+                    {
+                        Subject = subject.Name,
+                        Mac = myMac,
+                        Pp = myPp,
+                        Pt = myPt,
+                        Mt = ((myMac + myPp + myPt) / 3)
+                    };
+
+                    newBoletim.Marks.Add(newMark);
+                }
+                classBoletins.Boletins.Add(newBoletim);
+            }
+
+
+            return classBoletins;
+        }
     }
 }

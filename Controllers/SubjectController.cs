@@ -1,9 +1,11 @@
 using acadgest.Interface;
 using acadgest.Models.Subjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acadgest.Controllers
 {
+    [Authorize(Roles = "Admin,Coordinator,Classdirector")]
     [Route("[controller]")]
     public class SubjectController : Controller
     {
@@ -20,6 +22,7 @@ namespace acadgest.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [Route("add")]
         public IActionResult Add(Guid id)
         {
@@ -29,6 +32,7 @@ namespace acadgest.Controllers
             };
             return View(model);
         }
+        [Authorize(Roles = "Admin")]
         [Route("create")]
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] Subject model)

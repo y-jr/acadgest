@@ -8,8 +8,8 @@ namespace acadgest.Interface
     public interface ICoordenationRepository
     {
         public Task<List<Coordenation>> GetAllAsync();
-        public Task<List<ClassDetailsDto>> ClassDetails(Guid cordId);
         public Task<Coordenation?> GetByIdAsync(Guid id);
+        public Task<Guid?> GetIdByCordAsync(Guid id);
         public Task<Coordenation?> CreateAsync(Coordenation coordenation);
         public Task<Coordenation?> UpdateAsync(Guid id, UpdateCoordenationDto updateCoordenationDto);
         public Task<SetCoordinatorResult> SetCoordinator(Guid coordenationId, Guid coordinatorId);

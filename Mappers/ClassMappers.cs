@@ -18,5 +18,14 @@ namespace acadgest.Mappers
                 CourseId = classDto.CourseId,
             };
         }
+        public static ClassDto ToClassDto(this Class model)
+        {
+            return new ClassDto
+            {
+                Id = model.Id,
+                Name = model.Name,
+                ClassDirectorName = model.ClassDirector?.Name ?? "Sem diretor de turma"
+            };
+        }
     }
 }

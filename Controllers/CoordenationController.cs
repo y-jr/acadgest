@@ -2,32 +2,54 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using acadgest.Dto.Class;
 using acadgest.Dto.Coordenation;
 using acadgest.Interface;
 using acadgest.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace acadgest.Controllers
 {
+
+    [Authorize(Roles = "Admin,Coordinator")]
     [Route("coordenacao")]
     public class CoordenationController : Controller
     {
         private readonly ICoordenationRepository _coordenationRepo;
+        private readonly IClassRepository _classRepo;
 
-        public CoordenationController(ICoordenationRepository coordenationRepo)
+        public CoordenationController(ICoordenationRepository coordenationRepo, IClassRepository classRepo)
         {
             _coordenationRepo = coordenationRepo;
+            _classRepo = classRepo;
         }
 
         [Route("{id}")]
         public async Task<IActionResult> Index([FromRoute] Guid id)
         {
             ViewData["coord"] = id;
-            var model = await _coordenationRepo.ClassDetails(id);
+            var model = await _classRepo.GetByCordAsync(id);
             return View(model);
+        }
+        [Route("redirect")]
+        public async Task<IActionResult> Redirect()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            // Obter as roles do usuário
+            var roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
+            if (roles.Contains("Admin")) return RedirectToAction("Index", "Admin");
+
+            if (userId == null) return RedirectToAction("Logout", "Account");
+
+            var cordId = await _coordenationRepo.GetIdByCordAsync(Guid.Parse(userId));
+
+            if (cordId == null) return RedirectToAction("Logout", "Account");
+            
+            return Redirect($"/coordenacao/{cordId}");
         }
         [Route("all")]
         [HttpPost]
@@ -37,6 +59,7 @@ namespace acadgest.Controllers
             return Ok(coordinations);
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("edit/{id}")]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
@@ -51,6 +74,7 @@ namespace acadgest.Controllers
             return View(coordenationDto);
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("update/{id}")]
         [HttpPost]
         public async Task<IActionResult> Update(Guid id, [FromForm] UpdateCoordenationDto dto)
@@ -60,6 +84,7 @@ namespace acadgest.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("create")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateCoordenationDto coordenationDto)
@@ -72,6 +97,7 @@ namespace acadgest.Controllers
 
 
 
+        [Authorize(Roles = "Admin")]
         [Route("delete")]
         [HttpPost]
         public async Task<IActionResult> Delete(Guid id)

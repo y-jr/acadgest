@@ -1,10 +1,11 @@
-using System.Threading.Tasks;
 using acadgest.Dto.Mark;
 using acadgest.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acadgest.Controllers
 {
+    [Authorize(Roles = "Admin,Coordinator,Classdirector")]
     [Route("[controller]")]
     public class MarkController : Controller
     {
@@ -25,6 +26,7 @@ namespace acadgest.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("mini/{id}")]
         public IActionResult AddMiniPauta([FromRoute] Guid id)
         {
@@ -34,6 +36,7 @@ namespace acadgest.Controllers
             };
             return View(model);
         }
+        [Authorize(Roles = "Admin")]
         [Route("create")]
         public async Task<IActionResult> Create([FromForm] CreateMiniPautaDto dto)
         {

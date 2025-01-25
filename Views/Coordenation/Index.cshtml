@@ -1,91 +1,45 @@
-@model IEnumerable<acadgest.Dto.Class.ClassDetailsDto>
+@model IEnumerable<acadgest.Dto.Class.ClassDto>
 
 @{
-    ViewData["Title"] = "Coordenação";
+    ViewData["Title"] = "Admin";
 }
 
-<div class="text-center">
-    <a class="btn-primary p-0 pt-2 rounded text-decoration-none" asp-route-id="@ViewData["coord"]"
-        asp-controller="Class" asp-action="NewClass" role="button"><b class="fs-1">+</b></a> Nova Turma
-</div>
 
 <div class="row">
+
     @foreach (var turma in Model)
     {
-        <div class="desc row shadow shadow-sm shadow-black border border-primary rounded">
-            <div class="col-8">
-                <h3 class="">@turma.Name</h3>
-                <h3 class="">@turma.Grade - @turma.Course</h3>
-            </div>
-            <div class="col-4 border-start text-center border-primary">
-                <p class="fs-4 ">@turma.ClassDirector</p>
-                <div>
-                    <a asp-controller="pupil" asp-action="add" asp-route-id="@turma.Id">
-                        <button class="btn btn-primary mb-1">+alunos</button>
-                    </a>
-                    <a asp-controller="Subject" asp-action="add" asp-route-id="@turma.Id">
-                        <button class="btn btn-primary mb-1">+Cadeira</button>
-                    </a>
+        <div class="card col-4 border border-primary">
+            <div class="card-body">
+                <h5 class="card-title">@turma.Name.ToUpper()</h5>
+
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="card-text">@turma.ClassDirectorName</p>
+                    </div>
+                    <a asp-controller="Admin" asp-action="EditCoordinator" asp-route-id="@turma.Id"
+                        class="btn btn-warning">Edit</a>
                 </div>
+
+            </div>
+            <div class="card-body d-flex justify-content-around">
+                <form asp-controller="Coordenation" asp-action="Delete" asp-route-id="@turma.Id" method="post"
+                    style="display:inline;">
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Deletar</button>
+                </form>
+                <a asp-controller="Coordenation" asp-action="Edit" asp-route-id="@turma.Id"
+                    class="btn btn-warning">Editar</a>
+                <a asp-controller="Class" asp-action="Index" asp-route-id="@turma.Id"
+                    class="btn btn-primary">Pauta</a>
             </div>
         </div>
 
-        <table class="table table-striped table-bordered">
-            <thead>
-                <th>Nome</th>
-                <th>Gênero</th>
-                @foreach (var subject in turma.Subjects)
-                {
-                    <th>
-                        <a asp-controller="Mark" asp-action="Index" asp-route-id="@subject.Id">
-                            <button class="btn btn-primary">
-                                @subject.Name
-                            </button>
-                        </a>
-                    </th>
-                }
-                <th>
-                    <button type="button" class="btn btn-secondary" onclick="toggleTableBody('tbody-@turma.Id')">
-                        Mostrar/Ocultar
-                    </button>
-                </th>
-            </thead>
-            <tbody id="tbody-@turma.Id">
-                @foreach (var pauta in turma.Pautas)
-                {
-                    <tr>
-                        <td>@pauta.PupilName</td>
-                        @if (pauta.PupilGender == "F")
-                        {
-                            <td class="text-center bg-female">@pauta.PupilGender</td>
-                        }
-                        else
-                        {
-                            <td class="text-center bg-male">@pauta.PupilGender</td>
-                        }
-                        @foreach (var nota in pauta.Marks)
-                        {
-                            <td>@nota.ToString("0.0")</td>
-                        }
-                        <td>
-                            <a asp-controller="Document" asp-action="Boletim" asp-route-id="@pauta.PupilId">
-                                <button class="btn btn-secondary">Boletim</button>
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
     }
-</div>
+    <div class="card col-4 d-flex justify-content-center align-items-center border border-primary">
+        <a class="btn-primary rounded text-decoration-none" asp-route-id="@ViewData["coord"]" asp-controller="Class"
+            asp-action="NewClass" role="button"><b class="fs-1">+</b></a>
+    </div>
 
-<script>
-    function toggleTableBody(tbodyId) {
-        const tbody = document.getElementById(tbodyId);
-        if (tbody.style.display === "none") {
-            tbody.style.display = "";
-        } else {
-            tbody.style.display = "none";
-        }
-    }
-</script>
+
+</div>

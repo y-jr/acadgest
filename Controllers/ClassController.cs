@@ -1,10 +1,13 @@
+using System.Threading.Tasks;
 using acadgest.Dto.Class;
 using acadgest.Interface;
 using acadgest.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace acadgest.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class ClassController : Controller
     {
@@ -18,10 +21,15 @@ namespace acadgest.Controllers
             _courseRepo = courseRepo;
         }
 
-        public IActionResult Index()
+        [Route("{id}")]
+        [Authorize(Roles = "Admin,Coordinator,Classdirector")]
+        public async Task<IActionResult> Index([FromRoute] Guid id)
         {
-            return View();
+            var model = await _classRepo.ClassDetailsAsync(id);
+
+            return View(model);
         }
+        [Authorize(Roles = "Admin")]
         [Route("new/{id}")]
         public async Task<IActionResult> NewClass([FromRoute] Guid id)
         {
@@ -37,6 +45,7 @@ namespace acadgest.Controllers
             model.Courses = courses;
             return View(model);
         }
+        [Authorize(Roles = "Admin")]
         [Route("new")]
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateClassDto classDto)

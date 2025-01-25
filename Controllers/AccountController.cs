@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
+
 public class AccountController : Controller
 {
     private readonly IAccountRepository _accountRepo;
@@ -133,7 +134,9 @@ public class AccountController : Controller
     }
 
 
+
     // -------------------------------------Processa o edit
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(EditUserViewModel model)
     {
 
@@ -152,14 +155,9 @@ public class AccountController : Controller
         // Redireciona ou retorna sucesso
         return RedirectToAction("Index");
     }
-
-    private IActionResult RedirectToLocal(string returnUrl)
+    // -------------------------------------Acesso negado
+    public IActionResult AccessDenied()
     {
-        if (Url.IsLocalUrl(returnUrl))
-        {
-            return Redirect(returnUrl);
-        }
-        return RedirectToAction(nameof(HomeController.Index), "Home");
+        return View();
     }
-
 }

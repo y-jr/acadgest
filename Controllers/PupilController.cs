@@ -5,11 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using acadgest.Dto.Pupil;
 using acadgest.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace acadgest.Controllers
 {
+    [Authorize(Roles = "Admin,Coordinator,Classdirector")]
     [Route("[controller]")]
     public class PupilController : Controller
     {
@@ -27,6 +29,7 @@ namespace acadgest.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("add/{id}")]
         public IActionResult Add(Guid id)
         {
@@ -40,6 +43,7 @@ namespace acadgest.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         [Route("create")]
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] AddPupilDto pupilDto)

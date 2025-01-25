@@ -11,6 +11,9 @@ namespace acadgest.Interface
     {
         public Task<List<Class>> GetAllAsync();
         public Task<Class?> GetByIdAsync(Guid id);
+        public Task<ClassDetailsDto?> ClassDetailsAsync(Guid id);
+        public Task<List<ClassDto>?> GetByCordAsync(Guid cordId);
+        // public Task<List<ClassDto>?> GetByDirAsync(Guid dirId);
         public Task<Class?> CreateAsync(Class classModel);
         public Task<Class?> UpdateAsync(Guid id, UpdateClassDto classDto);
         public Task<Class?> SetDirectorAsync(Guid id, Guid directorId);

@@ -28,6 +28,7 @@ namespace acadgest.Data.Repository
         public async Task<List<ClassDetailsDto>?> ClassDetails(Guid cordId)
         {
             var turmas = new List<ClassDetailsDto>();
+            var marks = await _context.Marks.Where(m => m.Trimester == 1 && m.year == 2025).ToListAsync();
             var classes = await _context.Classes
                 .Where(c => c.CoordenationId == cordId)
                 .Include(c => c.ClassDirector)
@@ -58,28 +59,22 @@ namespace acadgest.Data.Repository
                     };
                     foreach (var subject in turma.Subjects)
                     {
-                        var mac = await _context.Marks
-                                    .FirstOrDefaultAsync(m =>
-                                    m.PupilId == pupil.Id &&
+                        var mac = marks
+                                    .FirstOrDefault(m =>
+                                    m.PupilId == pupil?.Id &&
                                     m.SubjectId == subject.Id &&
-                                    m.Trimester == 1 &&
-                                    m.year == 2025 &&
                                     m.test == "mac");
                         float myMac = mac?.Value ?? 0;
-                        var pp = await _context.Marks
-                                    .FirstOrDefaultAsync(m =>
-                                    m.PupilId == pupil.Id &&
+                        var pp = marks
+                                    .FirstOrDefault(m =>
+                                    m.PupilId == pupil?.Id &&
                                     m.SubjectId == subject.Id &&
-                                    m.Trimester == 1 &&
-                                    m.year == 2025 &&
                                     m.test == "pp");
                         float myPp = pp?.Value ?? 0;
-                        var pt = await _context.Marks
-                                    .FirstOrDefaultAsync(m =>
-                                    m.PupilId == pupil.Id &&
+                        var pt = marks
+                                    .FirstOrDefault(m =>
+                                    m.PupilId == pupil?.Id &&
                                     m.SubjectId == subject.Id &&
-                                    m.Trimester == 1 &&
-                                    m.year == 2025 &&
                                     m.test == "pt");
                         float myPt = pt?.Value ?? 0;
                         var mt = ((myMac + myPp + myPt) / 3);
@@ -136,6 +131,13 @@ namespace acadgest.Data.Repository
             var coordenation = await _context.Coordenations
                 .Include(c => c.Coordinator).FirstOrDefaultAsync(c => c.Id == id);
             return coordenation;
+        }
+
+        public async Task<Guid?> GetIdByCordAsync(Guid id)
+        {
+            var coord = await _context.Coordenations.FirstOrDefaultAsync(c => c.CoordinatorId == id);
+            if (coord == null) return null;
+            return coord.Id;
         }
 
         public async Task<SetCoordinatorResult> SetCoordinator(Guid coordenationId, Guid coordinatorId)
