@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using acadgest.Dto.Class;
 using acadgest.Interface;
 using acadgest.Mappers;
 using acadgest.Models.Classes;
+using acadgest.Models.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace acadgest.Data.Repository
@@ -13,11 +11,13 @@ namespace acadgest.Data.Repository
     public class ClassRepository : IClassRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<ClassRepository> _logger;
-        public ClassRepository(ApplicationDbContext context, ILogger<ClassRepository> logger)
+        public ClassRepository(ApplicationDbContext context, UserManager<AppUser> userManager, ILogger<ClassRepository> logger)
         {
             _context = context;
             _logger = logger;
+            _userManager = userManager;
         }
 
         public async Task<ClassDetailsDto?> ClassDetailsAsync(Guid id)
@@ -115,9 +115,9 @@ namespace acadgest.Data.Repository
             return classesDto;
         }
 
-        public Task<Class?> GetByIdAsync(Guid id)
+        public async Task<Class?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Classes.FindAsync(id);
         }
 
         public Task<Guid> GetIdByCordAsync(Guid cordId)
@@ -125,9 +125,38 @@ namespace acadgest.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Class?> SetDirectorAsync(Guid id, Guid directorId)
+        public async Task<Class?> SetDirectorAsync(Guid id, Guid directorId)
         {
-            throw new NotImplementedException();
+            var turma = await _context.Classes.FindAsync(id);
+            if (turma == null) return null;
+            else
+            {
+                // Verificar se a turma já tem um diretor
+                var oldDirectorId = turma.ClassDirectorId;
+                if (oldDirectorId != null)
+                {
+                    turma.ClassDirectorId = directorId;
+                    await _context.SaveChangesAsync();
+                    // Pega o antigo coordenador
+                    var oldDirector = await _context.Users.FindAsync(oldDirectorId);
+                    if (oldDirector != null)
+                    {
+                        // verifica se ainda tem turmas que ele coordena
+                        var classes = await _context.Classes.Where(c => c.ClassDirectorId == oldDirectorId).ToListAsync();
+                        if (classes.Count == 0)
+                        {
+                            // remove a role de coordenador
+                            var roles = await _userManager.GetRolesAsync(oldDirector);
+                            if (roles.Contains("Classdirector"))
+                            {
+                                await _userManager.RemoveFromRoleAsync(oldDirector, "Classdirector");
+                            }
+                        }
+                    }
+                }
+
+            }
+            return turma;
         }
 
         public Task<Class?> UpdateAsync(Guid id, UpdateClassDto classDto)

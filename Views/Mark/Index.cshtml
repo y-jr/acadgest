@@ -1,8 +1,10 @@
 @model acadgest.Dto.Class.ClassMiniPauta
+
 <h1>Minipautas de @Model.Name</h1>
 <a asp-controller="Mark" asp-action="AddMiniPauta" asp-route-id="@Model.Id">
-    <button class="btn btn-primary">Editar</button>
+    <button class="btn btn-primary">Adicionar Minipauta</button>
 </a>
+
 <table class="table table-striped text-center">
     <thead>
         <th>Nome</th>
@@ -12,7 +14,7 @@
         <th>PT</th>
         <th>MT</th>
         <th>Estado</th>
-        <th>OBS</th>
+        <th>Ações</th>
     </thead>
     <tbody>
         @foreach (var miniPauta in Model.MiniPautas)
@@ -40,7 +42,71 @@
                 {
                     <td class="bg-success">@miniPauta.Status</td>
                 }
+                <td>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="@Model.Id"
+                        data-pupil="@miniPauta.PupilId" data-name="@miniPauta.PupilName" data-mac="@miniPauta.Mac"
+                        data-pp="@miniPauta.Pp" data-pt="@miniPauta.Pt" data-mt="@miniPauta.Mt">Editar</button>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Minipauta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" method="post" asp-controller="Mark" asp-action="Update">
+                    <input type="hidden" id="editId" name="Id" />
+                    <input type="hidden" id="editPupilId" name="PupilId" />
+                    <div class="mb-3">
+                        <label for="editName" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="editName" name="PupilName" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editMac" class="form-label">MAC</label>
+                        <input type="number" step="0.1" class="form-control" id="editMac" name="Mac" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPp" class="form-label">PP</label>
+                        <input type="number" step="0.1" class="form-control" id="editPp" name="Pp" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPt" class="form-label">PT</label>
+                        <input type="number" step="0.1" class="form-control" id="editPt" name="Pt" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const editModal = document.getElementById('editModal');
+    editModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget;
+
+        // Captura os atributos do botão
+        const id = button.getAttribute('data-id');
+        const pupilId = button.getAttribute('data-pupil');
+        const name = button.getAttribute('data-name');
+        const mac = button.getAttribute('data-mac').replace(',', '.'); // Substitui vírgula por ponto
+        const pp = button.getAttribute('data-pp').replace(',', '.'); // Substitui vírgula por ponto
+        const pt = button.getAttribute('data-pt').replace(',', '.'); // Substitui vírgula por ponto
+
+        // Preenche os campos do modal
+        document.getElementById('editId').value = id;
+        document.getElementById('editPupilId').value = pupilId;
+        document.getElementById('editName').value = name;
+        document.getElementById('editMac').value = mac;
+        document.getElementById('editPp').value = pp;
+        document.getElementById('editPt').value = pt;
+    });
+</script>

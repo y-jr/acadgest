@@ -1,0 +1,18 @@
+@model IEnumerable<acadgest.Dto.AppUser.AppUserDto>
+
+<h2>Editar Diretor Diretor turma - @ViewData["class"]</h2>
+
+<form asp-route-id="@ViewData["turmaId"]" asp-controller="Class" asp-action="SetClassDirector" method="post">
+
+    <div class="form-group">
+        <label for="ClassDirectorId">Diretor Diretor turma</label>
+        <select name="ClassDirectorId" id="ClassDirectorId" class="form-control">
+            @foreach (var user in Model)
+            {
+                <option value="@user.Id">@user.Name</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn my-2 btn-primary">Salvar</button>
+</form>

@@ -32,17 +32,20 @@ namespace acadgest.Controllers
             return View();
         }
 
-        [Route("setcoordinator/{id}")]
+        [Authorize(Roles = "Admin,Coordinator")]
+        [Route("editcoordinator/{id}")]
         public async Task<IActionResult> EditCoordinator(Guid id)
         {
             var coordenation = await _coordenationRepo.GetByIdAsync(id);
-            if (coordenation == null) return NotFound("Coordenação não existe");
+            if (coordenation == null) return NotFound("Coordenação não existe não existe");
 
             ViewData["coordenation"] = coordenation.Name;
             ViewData["coordenationId"] = coordenation.Id;
-            var users = await _accountRepo.GeAllAsync();
+
+            var users = await _accountRepo.GetAllAsync();
             return View(users);
         }
+
 
         [Route("setcoordinator/{id}")]
         [HttpPost]

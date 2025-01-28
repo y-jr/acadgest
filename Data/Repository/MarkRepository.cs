@@ -267,5 +267,44 @@ namespace acadgest.Data.Repository
 
             return classBoletins;
         }
+
+        public async Task<bool> UpdateAsync(UpdateMiniPautaDto miniPautaDto)
+        {
+            var mac = await _context.Marks.FirstOrDefaultAsync(m =>
+                                m.SubjectId == miniPautaDto.Id &&
+                                m.Trimester == 1 &&
+                                m.year == 2025 &&
+                                m.test == "mac" &&
+                                m.PupilId == miniPautaDto.PupilId
+                                );
+
+            var pp = await _context.Marks.FirstOrDefaultAsync(m =>
+                                m.SubjectId == miniPautaDto.Id &&
+                                m.Trimester == 1 &&
+                                m.year == 2025 &&
+                                m.test == "pp" &&
+                                m.PupilId == miniPautaDto.PupilId
+                                );
+
+            var pt = await _context.Marks.FirstOrDefaultAsync(m =>
+                                m.SubjectId == miniPautaDto.Id &&
+                                m.Trimester == 1 &&
+                                m.year == 2025 &&
+                                m.test == "pt" &&
+                                m.PupilId == miniPautaDto.PupilId
+                                );
+
+            if (mac == null) return false;
+            if (pp == null) return false;
+            if (pt == null) return false;
+
+            mac.Value = float.Parse(miniPautaDto.Mac.Replace(",", "."));
+            pp.Value = float.Parse(miniPautaDto.Pp.Replace(",", "."));
+            pt.Value = float.Parse(miniPautaDto.Pt.Replace(",", "."));
+
+            await _context.SaveChangesAsync();
+            return true;
+
+        }
     }
 }

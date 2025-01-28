@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using acadgest.Dto.Class;
 using acadgest.Dto.Coordenation;
-using acadgest.Dto.Pupil;
 using acadgest.Interface;
 using acadgest.Mappers;
 using acadgest.Models.Coordenations;

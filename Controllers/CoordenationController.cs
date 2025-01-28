@@ -35,22 +35,7 @@ namespace acadgest.Controllers
             var model = await _classRepo.GetByCordAsync(id);
             return View(model);
         }
-        [Route("redirect")]
-        public async Task<IActionResult> Redirect()
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            // Obter as roles do usuário
-            var roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
-            if (roles.Contains("Admin")) return RedirectToAction("Index", "Admin");
 
-            if (userId == null) return RedirectToAction("Logout", "Account");
-
-            var cordId = await _coordenationRepo.GetIdByCordAsync(Guid.Parse(userId));
-
-            if (cordId == null) return RedirectToAction("Logout", "Account");
-            
-            return Redirect($"/coordenacao/{cordId}");
-        }
         [Route("all")]
         [HttpPost]
         public async Task<IActionResult> GetAll()

@@ -1,4 +1,6 @@
+using acadgest.Dto.AppUser;
 using acadgest.Interface;
+using acadgest.Mappers;
 using acadgest.Models.Results;
 using acadgest.Models.User;
 using Microsoft.AspNetCore.Identity;
@@ -107,11 +109,22 @@ namespace acadgest.Data.Repository
         }
 
         // ---------------------------------------------GETALL---------------------------------------------------
-        public async Task<List<AppUser>> GeAllAsync()
+        public async Task<List<AppUserDto>> GetAllAsync()
         {
-            var users = await _userManager.Users.ToListAsync();
-            return users;
+            var usersDto = await _userManager.Users
+                .Select(user => new AppUserDto
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    IdNumber = user.IdNumber,
+                    Username = user.UserName ?? "",
+                    Email = user.Email
+                })
+                .ToListAsync();
+
+            return usersDto;
         }
+
 
         // ---------------------------------------------GETBYID---------------------------------------------------
         public async Task<AppUser?> GetByIdAsync(Guid id)

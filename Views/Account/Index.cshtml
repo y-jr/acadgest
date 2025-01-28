@@ -1,4 +1,4 @@
-@model IEnumerable<acadgest.Models.User.AppUser>
+@model IEnumerable<acadgest.Dto.AppUser.AppUserDto>
 
 @{
     ViewData["Title"] = "Lista de Usuários";
@@ -28,7 +28,7 @@
         {
             <tr>
                 <td>@user.Name</td>
-                <td>@user.UserName</td>
+                <td>@user.Username</td>
                 <td>@user.Email</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning">Editar</a>

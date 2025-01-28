@@ -28,7 +28,7 @@ public class AccountController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var users = await _accountRepo.GeAllAsync();
+        var users = await _accountRepo.GetAllAsync();
         return View(users);
     }
     // -------------------------------------Exibe a página de registro

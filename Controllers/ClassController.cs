@@ -29,23 +29,22 @@ namespace acadgest.Controllers
 
             return View(model);
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Coordinator")]
         [Route("new/{id}")]
         public async Task<IActionResult> NewClass([FromRoute] Guid id)
         {
             var model = new ClassModelView();
             model.NewClass.CoordenationId = id;
-            var users = await _accountRepo.GeAllAsync();
+            var users = await _accountRepo.GetAllAsync();
+
             if (users != null)
-            {
-                var usersDto = users.Select(u => u.ToUserDto()).ToList();
-                model.Users = usersDto;
-            }
+                model.Users = users;
+
             var courses = await _courseRepo.GetAllAsync();
             model.Courses = courses;
             return View(model);
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Coordinator")]
         [Route("new")]
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateClassDto classDto)
@@ -57,6 +56,31 @@ namespace acadgest.Controllers
                 return RedirectToAction("Index", "Admin");
             return BadRequest("Erro ao adicionar Turma");
         }
+
+
+        [Authorize(Roles = "Admin,Coordinator")]
+        [Route("editclassdirector/{id}")]
+        public async Task<IActionResult> EditClassDirector(Guid id)
+        {
+            var turma = await _classRepo.GetByIdAsync(id);
+            if (turma == null) return NotFound("Turma não existe");
+
+            ViewData["class"] = turma.Name;
+            ViewData["turmaId"] = turma.Id;
+
+            var users = await _accountRepo.GetAllAsync();
+            return View(users);
+        }
+
+        [Route("setcclassdirector/{id}")]
+        [HttpPost]
+        public async Task<IActionResult> SetClassDirector(Guid id, [FromForm] Guid classDirectorId)
+        {
+            var result = await _classRepo.SetDirectorAsync(id, classDirectorId);
+            if (result == null) return NotFound();
+            return RedirectToAction("Index", "Home");
+        }
+
         [Route("error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
