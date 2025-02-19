@@ -1,28 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\acadgest.csproj": {}
+    "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\acadgest.csproj": {}
   },
   "projects": {
-    "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\acadgest.csproj": {
+    "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\acadgest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\acadgest.csproj",
+        "projectUniqueName": "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\acadgest.csproj",
         "projectName": "acadgest",
-        "projectPath": "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\acadgest.csproj",
-        "packagesPath": "C:\\Users\\Yango\\.nuget\\packages\\",
-        "outputPath": "C:\\DOCS\\study\\Programação\\C\\C#\\acadgest\\obj\\",
+        "projectPath": "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\acadgest.csproj",
+        "packagesPath": "C:\\Users\\muieb\\.nuget\\packages\\",
+        "outputPath": "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Yango\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\muieb\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,8 +56,6 @@
               "version": "[8.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.0, )"
             },
@@ -69,8 +64,6 @@
               "version": "[8.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.0, )"
             },
@@ -106,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

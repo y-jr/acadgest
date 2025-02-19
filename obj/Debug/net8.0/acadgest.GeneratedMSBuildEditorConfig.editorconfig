@@ -17,111 +17,111 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = acadgest
 build_property.RootNamespace = acadgest
-build_property.ProjectDir = C:\DOCS\study\Programação\C\C#\acadgest\
+build_property.ProjectDir = C:\Yango\Work\syyt\acadgest\acadgest\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\DOCS\study\Programação\C\C#\acadgest
+build_property.MSBuildProjectDirectory = C:\Yango\Work\syyt\acadgest\acadgest
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Account/AccessDenied.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Account/Edit.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Account/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Account/Index.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Account/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Account/Login.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Account/Register.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Admin/EditCoordinator.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Admin/EditCoordinator.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdENvb3JkaW5hdG9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Admin/Index.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Admin/NewCoordenation.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Admin/NewCoordenation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3Q29vcmRlbmF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Class/EditClassDirector.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Class/EditClassDirector.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcRWRpdENsYXNzRGlyZWN0b3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Class/Index.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Class/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Class/NewClass.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Class/NewClass.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcTmV3Q2xhc3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Coordenation/Edit.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Coordenation/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29vcmRlbmF0aW9uXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Coordenation/Index.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Coordenation/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29vcmRlbmF0aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Document/Boletim.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Document/Boletim.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdW1lbnRcQm9sZXRpbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Home/Index.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Home/Privacy.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Mark/AddMiniPauta.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Mark/AddMiniPauta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFya1xBZGRNaW5pUGF1dGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Mark/Index.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Mark/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFya1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Pupil/Add.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Pupil/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVwaWxcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Shared/Error.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Subject/Add.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Subject/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3ViamVjdFxBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/_ViewImports.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/_ViewStart.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/DOCS/study/Programação/C/C\#/acadgest/Views/Shared/_Layout.cshtml]
+[C:/Yango/Work/syyt/acadgest/acadgest/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-vwkvvlc2me

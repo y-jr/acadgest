@@ -1,6 +1,12 @@
 @model acadgest.Models.User.LoginViewModel
 
-<h2>Login</h2>
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 @if (!ViewData.ModelState.IsValid)
 {
@@ -11,26 +17,36 @@
         }
     </div>
 }
-
-<form asp-action="Login" method="post">
-    <div class="form-group">
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
+<div class="body row vh-100 d-flex justify-content-center align-items-center relative">
+    <div class="logo fixed-top">
+        <img src="~/img/logo.png" alt="E-School">
     </div>
 
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+
+    <div class="div-form col-12 col-md-10 col-xl-6 d-flex flex-column ajustify-content-center align-items-center">
+        <h2 class="text-center mb-4 fs-1">Login</h2>
+        <form asp-action="Login" method="post" class="w-75">
+            <div class="form-group mb-4">
+                <label asp-for="Username" class="mb-2 txt-normal">Nome de usuário</label>
+                <input asp-for="Username" class="form-control mb-2" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Password" class="mb-2  txt-normal">Senha</label>
+                <input asp-for="Password" type="password" class="form-control mb-2" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group my-2">
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </div>
+            <div class="form-group mt-2 text-center">
+                <a href="@Url.Action("Register", "Account")">Não tem uma conta?</a>
+            </div>
+        </form>
+
     </div>
 
-    <div class="form-group form-check">
-        <input asp-for="RememberMe" class="form-check-input" />
-        <label class="form-check-label" asp-for="RememberMe">Lembrar-me</label>
-    </div>
+</div>
 
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
-
-<a href="@Url.Action("Register", "Account")">Criar uma nova conta</a>

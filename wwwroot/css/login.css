@@ -1,0 +1,101 @@
+/* Fontes */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+/* Fontes */
+
+body {
+  background-image: url("../img/fundo-login.jpg");
+  background-size: cover; /* Garante que a imagem cubra toda a tela */
+  background-position: center; /* Centraliza a imagem */
+  background-attachment: fixed; /* Mantém a imagem fixa ao rolar */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita rolagem horizontal */
+  font-family: "Inter", serif;
+}
+
+body::before {
+  margin: 0;
+  padding: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 110%;
+  height: 110%;
+  background: rgba(255, 255, 255, 0.682);
+  z-index: 1;
+}
+div.logo {
+  z-index: 1;
+}
+div.div-form {
+    z-index: 2;
+}
+div.div-form h2 {
+    font-weight: 400;
+}
+div.div-form form {
+    padding: 2rem 3rem 2rem 3rem;
+    border: 2px solid #243a69;
+    background-color: #d4cdc5be;
+    box-shadow: 6px 6px 10px 0.1px black;
+}
+div.div-form form input {
+    border-radius: 0;
+  border: 2px solid #243a69;
+}
+div.div-form form button {
+    border-radius: 0;
+    background: #243a69;
+    border: 1px solid #243a69;
+    transition: all 0.3s;
+}
+div.div-form form button:hover {
+    border-radius: 0;
+    background: #18284a;
+  box-shadow: 1px 1px 3px black;
+  padding-left: 20px;
+}
+div.div-form form a {
+    text-decoration: none;
+    color: #243a69;
+}
+
+/* Responsividade */
+/* Para telas pequenas (celulares) */
+@media screen and (max-width: 576px) {
+  .txt-normal {
+      font-size: 1.2rem;
+  }
+  div.logo {
+    display: flex;
+    justify-content: center;
+  }
+  div.logo img {
+    margin: auto;
+    width: 10rem;
+  }
+}
+
+/* Para telas médias (tablets) */
+@media screen and (min-width: 577px) and (max-width: 992px) {
+  .txt-normal {
+    font-size: 1.2rem;
+  }
+  div.logo img {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 17rem;
+  }
+}
+/* Para telas grandes (desktop) */
+@media screen and (min-width: 992px){
+  .txt-normal {
+      font-size: 1.2rem;
+    }
+    div.logo img {
+      margin-top: 10px;
+      margin-left: 10px;
+      width: 17rem;
+    }
+}
