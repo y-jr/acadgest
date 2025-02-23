@@ -32,6 +32,7 @@ public class AccountController : Controller
         return View(users);
     }
     // -------------------------------------Exibe a página de registro
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public IActionResult Register()
     {
@@ -126,7 +127,6 @@ public class AccountController : Controller
     }
 
     // -------------------------------------Processa o logout
-    [HttpPost]
     public async Task<IActionResult> Logout()
     {
         var logout = await _accountRepo.LogoutAsync();
@@ -154,6 +154,13 @@ public class AccountController : Controller
         if (!deletResult.DeleteSucceded) ModelState.AddModelError("", deletResult.Error);
         // Redireciona ou retorna sucesso
         return RedirectToAction("Index");
+    }
+    // -------------------------------------Meu portal
+    [Authorize]
+    public async Task<IActionResult> UserPortal()
+    {
+        var roles = await _accountRepo.GetRolesAsync();
+        return Ok(roles);
     }
     // -------------------------------------Acesso negado
     public IActionResult AccessDenied()

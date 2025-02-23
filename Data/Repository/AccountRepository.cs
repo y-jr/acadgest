@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using acadgest.Dto.AppUser;
 using acadgest.Interface;
 using acadgest.Mappers;
@@ -11,10 +12,11 @@ namespace acadgest.Data.Repository
     public class AccountRepository : IAccountRepository
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly SignInManager<AppUser> _signInManager;
-        public AccountRepository(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountRepository(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IHttpContextAccessor httpContextAccessor)
         {
-
+            _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -134,6 +136,26 @@ namespace acadgest.Data.Repository
             if (user == null) return null;
             return user;
         }
+
+        public async Task<List<string>> GetRolesAsync()
+        {
+            var user = _httpContextAccessor.HttpContext?.User;
+
+            if (user == null || !user.Identity.IsAuthenticated)
+                return new List<string>(); // Retorna lista vazia se não estiver autenticado
+
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userId))
+                return new List<string>();
+
+            var identityUser = await _userManager.FindByIdAsync(userId);
+            if (identityUser == null)
+                return new List<string>();
+
+            var roles = await _userManager.GetRolesAsync(identityUser);
+            return roles.ToList();
+        }
+
 
         // ---------------------------------------------LOGIN---------------------------------------------------
         public async Task<LoginResults> LoginAsync(LoginViewModel loginViewModel)

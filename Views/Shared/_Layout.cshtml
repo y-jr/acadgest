@@ -12,27 +12,43 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
             <div class="container-fluid position-relative">
                 <div class="position-absolute login-logout-div d-flex justify-content-end">
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item me-2">
+                                <a class="nav-link fs-5 text-main" asp-area="" asp-controller="Home"
+                                    asp-action="Index">Início</a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a class="nav-link fs-5 text-main" asp-area="" asp-controller="Home"
+                                    asp-action="Index">E-Jornal</a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a class="nav-link fs-5 text-main" asp-area="" asp-controller="Home"
+                                    asp-action="Index">Midiateca</a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a class="nav-link fs-5 text-main" asp-area="" asp-controller="Home"
+                                    asp-action="Index">E-Jornal</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto me-4">
                             @if (User.Identity != null && User.Identity.IsAuthenticated)
                             {
-                                if (User.IsInRole("Admin"))
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Admin" asp-action="Index">Admin</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Account" asp-action="Index">Usuários</a>
-                                    </li>
-                                }
-                                <li class="nav-item">
-                                    <form asp-action="Logout" asp-controller="Account" method="post">
-                                        <button type="submit" class="btn btn-link nav-link">Logout</button>
-                                    </form>
-                                </li>
+
+                                <div class="dropdown">
+                                    <img src="~/img/conta.png" width="40px" alt="Usuário"
+                                        class="rounded-circle dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown">
+                                    <ul class="dropdown-menu rounded-0 bg-main dropdown-menu-end"
+                                        aria-labelledby="userDropdown">
+                                        <li><a class="dropdown-item text-account" href="Account/UserPortal">Meu portal</a>
+                                        </li>
+                                        <li><a class="dropdown-item text-account" href="#">Configurações</a></li>
+                                        <li><a class="dropdown-item text-account" href="Account/Logout">Sair</a></li>
+                                    </ul>
+                                </div>
                             }
                             else
                             {
@@ -46,24 +62,14 @@
                         </ul>
                     </div>
                 </div>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">acadgest</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img class="logo" src="~/img/logo.png" alt="" srcset="">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    @if (User.Identity != null && User.Identity.IsAuthenticated)
-                    {
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Redirect"
-                                    asp-action="Coordenation">Coordenação</a>
-                            </li>
-                        </ul>
-                    }
                 </div>
             </div>
         </nav>

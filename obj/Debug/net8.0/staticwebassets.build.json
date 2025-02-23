@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bmdjJb9pL6+mIlCSJmEQs4ts/gyCCFiSXH4olih77SI=",
+  "Hash": "Nhsjzc+L0hrxSF9LuiZXuF451XqH0iwc0uHBf62C9ps=",
   "Source": "acadgest",
   "BasePath": "_content/acadgest",
   "Mode": "Default",
@@ -1250,6 +1250,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\wwwroot\\img\\conta.png",
+      "SourceId": "acadgest",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\wwwroot\\",
+      "BasePath": "_content/acadgest",
+      "RelativePath": "img/conta.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\conta.png"
     },
     {
       "Identity": "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\wwwroot\\img\\fenda.jpg",
