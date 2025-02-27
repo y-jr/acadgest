@@ -48,7 +48,8 @@ body {
 
 /* Tabelas */
 .table-container {
-  max-height: 400px; /* Altura máxima da tabela rolável */
+  max-height: 70vh; /* Altura máxima da tabela rolável */
+  /* min-width: 400px; */
   overflow-y: auto;
   border: 1px solid #ddd; /* Borda opcional */
 }
@@ -101,4 +102,15 @@ td {
     margin-left: 10px;
     width: 12rem;
   }
+}
+
+div.card-class{
+  border: 1px solid #243a69;
+  background-color: #d4cdc5;
+}
+div.desc{
+  border: 1px solid #243a69;
+}
+div.desc div.ris{
+  border-left: 1px solid #243a69;
 }

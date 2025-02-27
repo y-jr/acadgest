@@ -1,0 +1,26 @@
+ <ul class="navbar-nav ms-auto me-4">
+                            @if (User.Identity != null && User.Identity.IsAuthenticated)
+                            {
+
+                                    <div class="dropdown">
+                                        <img src="~/img/conta.png" width="40px" alt="Usuário"
+                                            class="rounded-circle dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown">
+                                        <ul class="dropdown-menu rounded-0 bg-main dropdown-menu-end"
+                                            aria-labelledby="userDropdown">
+                                            <li><a class="dropdown-item text-account" href="Account/UserPortal">Meu portal</a>
+                                            </li>
+                                            <li><a class="dropdown-item text-account" href="#">Configurações</a></li>
+                                            <li><a class="dropdown-item text-account" href="Account/Logout">Sair</a></li>
+                                        </ul>
+                                    </div>
+                            }
+                            else
+                            {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Account" asp-action="Register">Registrar</a>
+                                    </li>
+                            }
+                        </ul>

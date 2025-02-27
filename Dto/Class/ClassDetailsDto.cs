@@ -10,6 +10,7 @@ namespace acadgest.Dto.Class
         public string Grade { get; set; } = string.Empty;
         public string? Course { get; set; } = string.Empty;
         public string? ClassDirector { get; set; } = string.Empty;
+        public int? Trimestre { get; set; }
         public ICollection<SubjectDto> Subjects { get; set; } = new List<SubjectDto>();
         public List<MarksForCoordenationViewDto> Pautas { get; set; } = new();
     }

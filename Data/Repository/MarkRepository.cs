@@ -109,9 +109,10 @@ namespace acadgest.Data.Repository
         }
 
 
-        public async Task<ClassMiniPauta?> GetMiniAsync(Guid subjectId)
+        public async Task<ClassMiniPauta?> GetMiniAsync(Guid subjectId, int trim)
         {
             var classMiniPauta = new ClassMiniPauta();
+            classMiniPauta.Trimester = trim;
 
             var subject = await _context.Subjects.FindAsync(subjectId);
 
@@ -122,9 +123,9 @@ namespace acadgest.Data.Repository
 
             foreach (var aluno in alunos)
             {
-                var MAC = await _context.Marks.FirstOrDefaultAsync(m => m.PupilId == aluno.Id && m.test == "mac" && m.SubjectId == subjectId);
-                var PP = await _context.Marks.FirstOrDefaultAsync(m => m.PupilId == aluno.Id && m.test == "pp" && m.SubjectId == subjectId);
-                var PT = await _context.Marks.FirstOrDefaultAsync(m => m.PupilId == aluno.Id && m.test == "pt" && m.SubjectId == subjectId);
+                var MAC = await _context.Marks.FirstOrDefaultAsync(m => m.PupilId == aluno.Id && m.test == "mac" && m.SubjectId == subjectId && m.Trimester == trim);
+                var PP = await _context.Marks.FirstOrDefaultAsync(m => m.PupilId == aluno.Id && m.test == "pp" && m.SubjectId == subjectId && m.Trimester == trim);
+                var PT = await _context.Marks.FirstOrDefaultAsync(m => m.PupilId == aluno.Id && m.test == "pt" && m.SubjectId == subjectId && m.Trimester == trim);
                 var miniPauta = new MiniPautaForView
                 {
                     PupilId = aluno.Id,
@@ -272,7 +273,7 @@ namespace acadgest.Data.Repository
         {
             var mac = await _context.Marks.FirstOrDefaultAsync(m =>
                                 m.SubjectId == miniPautaDto.Id &&
-                                m.Trimester == 1 &&
+                                m.Trimester == miniPautaDto.Trim &&
                                 m.year == 2025 &&
                                 m.test == "mac" &&
                                 m.PupilId == miniPautaDto.PupilId
@@ -280,7 +281,7 @@ namespace acadgest.Data.Repository
 
             var pp = await _context.Marks.FirstOrDefaultAsync(m =>
                                 m.SubjectId == miniPautaDto.Id &&
-                                m.Trimester == 1 &&
+                                m.Trimester == miniPautaDto.Trim &&
                                 m.year == 2025 &&
                                 m.test == "pp" &&
                                 m.PupilId == miniPautaDto.PupilId
@@ -288,20 +289,59 @@ namespace acadgest.Data.Repository
 
             var pt = await _context.Marks.FirstOrDefaultAsync(m =>
                                 m.SubjectId == miniPautaDto.Id &&
-                                m.Trimester == 1 &&
+                                m.Trimester == miniPautaDto.Trim &&
                                 m.year == 2025 &&
                                 m.test == "pt" &&
                                 m.PupilId == miniPautaDto.PupilId
                                 );
-
-            if (mac == null) return false;
-            if (pp == null) return false;
-            if (pt == null) return false;
-
-            mac.Value = float.Parse(miniPautaDto.Mac.Replace(",", "."));
-            pp.Value = float.Parse(miniPautaDto.Pp.Replace(",", "."));
-            pt.Value = float.Parse(miniPautaDto.Pt.Replace(",", "."));
-
+            if (mac == null)
+            {
+                await _context.Marks.AddAsync(new Mark
+                {
+                    SubjectId = miniPautaDto.Id,
+                    Trimester = miniPautaDto.Trim,
+                    year = 2025,  // Certifique-se de que a propriedade tem a primeira letra maiúscula
+                    test = "mac", // Certifique-se de que a propriedade existe na entidade
+                    PupilId = miniPautaDto.PupilId,
+                    Value = float.Parse(miniPautaDto.Mac.Replace(",", "."))
+                });
+            }
+            else
+            {
+                mac.Value = float.Parse(miniPautaDto.Mac.Replace(",", "."));
+            }
+            if (pp == null)
+            {
+                await _context.Marks.AddAsync(new Mark
+                {
+                    SubjectId = miniPautaDto.Id,
+                    Trimester = miniPautaDto.Trim,
+                    year = 2025,  // Certifique-se de que a propriedade tem a primeira letra maiúscula
+                    test = "pp", // Certifique-se de que a propriedade existe na entidade
+                    PupilId = miniPautaDto.PupilId,
+                    Value = float.Parse(miniPautaDto.Pp.Replace(",", "."))
+                });
+            }
+            else
+            {
+                pp.Value = float.Parse(miniPautaDto.Pp.Replace(",", "."));
+            }
+            if (pt == null)
+            {
+                await _context.Marks.AddAsync(new Mark
+                {
+                    SubjectId = miniPautaDto.Id,
+                    Trimester = miniPautaDto.Trim,
+                    year = 2025,  // Certifique-se de que a propriedade tem a primeira letra maiúscula
+                    test = "pt", // Certifique-se de que a propriedade existe na entidade
+                    PupilId = miniPautaDto.PupilId,
+                    Value = float.Parse(miniPautaDto.Pt.Replace(",", "."))
+                });
+            }
+            else
+            {
+                pt.Value = float.Parse(miniPautaDto.Pt.Replace(",", "."));
+            }
             await _context.SaveChangesAsync();
             return true;
 

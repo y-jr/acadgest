@@ -32,7 +32,7 @@ public class AccountController : Controller
         return View(users);
     }
     // -------------------------------------Exibe a página de registro
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     [HttpGet]
     public IActionResult Register()
     {
@@ -160,7 +160,18 @@ public class AccountController : Controller
     public async Task<IActionResult> UserPortal()
     {
         var roles = await _accountRepo.GetRolesAsync();
-        return Ok(roles);
+        if (roles.Contains("Admin"))
+        {
+            return RedirectToAction("Index", "Admin");
+        }
+        else if (roles.Contains("Classdirector"))
+        {
+            return RedirectToAction("ClassDirector", "Class");
+        }
+        else
+        {
+            return Ok(roles);
+        }
     }
     // -------------------------------------Acesso negado
     public IActionResult AccessDenied()

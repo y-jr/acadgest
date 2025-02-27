@@ -1,46 +1,61 @@
 @model acadgest.Models.User.RegisterViewModel
 
-<h2>Registrar</h2>
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<form asp-action="Register" method="post">
-    <div class="form-group">
-        <label asp-for="Name">Nome completo</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="row">
-        <div class="form-group col">
-            <label asp-for="UserName">Nome de usuário</label>
-            <input asp-for="UserName" class="form-control" />
-            <span asp-validation-for="UserName" class="text-danger"></span>
-        </div>
-        <div class="form-group col">
-            <label asp-for="IdNumber">Número de identificação</label>
-            <input asp-for="IdNumber" class="form-control" />
-            <span asp-validation-for="IdNumber" class="text-danger"></span>
-        </div>
+
+<div class="body row vh-100 d-flex justify-content-center align-items-center relative">
+    <div class="logo fixed-top">
+        <img src="~/img/logo.png" alt="E-School">
     </div>
 
+    <div class="div-form col-12 col-md-10 col-xl-6 d-flex flex-column ajustify-content-center align-items-center">
+<h2 class="text-center mb-4 fs-1">Registrar</h2>
+        <form asp-action="Register" method="post">
+            <div class="form-group">
+                <label asp-for="Name">Nome completo</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group col">
+                    <label asp-for="UserName">Nome de usuário</label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group col">
+                    <label asp-for="IdNumber">Número de identificação</label>
+                    <input asp-for="IdNumber" class="form-control" />
+                    <span asp-validation-for="IdNumber" class="text-danger"></span>
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
     </div>
+    <a href="@Url.Action("Login", "Account")">Já tem uma conta? Login</a>
 
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ConfirmPassword"></label>
-        <input asp-for="ConfirmPassword" type="password" class="form-control" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Registrar</button>
-</form>
-
-<a href="@Url.Action("Login", "Account")">Já tem uma conta? Login</a>
+</div>

@@ -5,34 +5,35 @@
     <button class="btn btn-primary">Adicionar Minipauta</button>
 </a>
 
+    <div class="table-container mt-4">
 <table class="table table-striped text-center">
     <thead>
-        <th>Nome</th>
-        <th>Gênero</th>
-        <th>MAC</th>
-        <th>PP</th>
-        <th>PT</th>
-        <th>MT</th>
-        <th>Estado</th>
-        <th>Ações</th>
+        <th class="text-black text-center border-1 border-black">Nome</th>
+        <th class="text-black text-center border-1 border-black">Gênero</th>
+        <th class="text-black text-center border-1 border-black">MAC</th>
+        <th class="text-black text-center border-1 border-black">PP</th>
+        <th class="text-black text-center border-1 border-black">PT</th>
+        <th class="text-black text-center border-1 border-black">MT</th>
+        <th class="text-black text-center border-1 border-black">Estado</th>
+        <th class="text-black text-center border-1 border-black">Ações</th>
     </thead>
     <tbody>
         @foreach (var miniPauta in Model.MiniPautas)
         {
             <tr>
-                <td>@miniPauta.PupilName</td>
+                <td class="border-1 border-black">@miniPauta.PupilName</td>
                 @if (miniPauta.PupilGender == "F")
                 {
-                    <td class="text-center bg-female">Feminino</td>
+                    <td class="text-center bg-female  border-1 border-black">Feminino</td>
                 }
                 else
                 {
-                    <td class="text-center bg-male">Masculino</td>
+                    <td class="text-center bg-male  border-1 border-black">Masculino</td>
                 }
-                <td>@miniPauta.Mac.ToString("0.0")</td>
-                <td>@miniPauta.Pp.ToString("0.0")</td>
-                <td>@miniPauta.Pt.ToString("0.0")</td>
-                <td>@miniPauta.Mt.ToString("0.0")</td>
+                <td class="border-1 border-black">@miniPauta.Mac.ToString("0.0")</td>
+                <td class="border-1 border-black">@miniPauta.Pp.ToString("0.0")</td>
+                <td class="border-1 border-black">@miniPauta.Pt.ToString("0.0")</td>
+                <td class="border-1 border-black">@miniPauta.Mt.ToString("0.0")</td>
 
                 @if (miniPauta.Status == "Reprovado")
                 {
@@ -51,6 +52,7 @@
         }
     </tbody>
 </table>
+    </div>
 
 <!-- Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -62,6 +64,7 @@
             </div>
             <div class="modal-body">
                 <form id="editForm" method="post" asp-controller="Mark" asp-action="Update">
+                    <input type="hidden" id="trim" name="Trim" value="@Model.Trimester" />
                     <input type="hidden" id="editId" name="Id" />
                     <input type="hidden" id="editPupilId" name="PupilId" />
                     <div class="mb-3">

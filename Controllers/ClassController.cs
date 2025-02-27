@@ -23,10 +23,20 @@ namespace acadgest.Controllers
 
         [Route("{id}")]
         [Authorize(Roles = "Admin,Coordinator,Classdirector")]
-        public async Task<IActionResult> Index([FromRoute] Guid id)
+        public async Task<IActionResult> Index([FromRoute] Guid id, [FromQuery] int trim)
         {
-            var model = await _classRepo.ClassDetailsAsync(id);
+            var model = await _classRepo.ClassDetailsAsync(id, trim);
 
+            // return Ok(model);
+            return View(model);
+        }
+        [Authorize(Roles = "Classdirector")]
+        public async Task<IActionResult> ClassDirector()
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null) return Unauthorized();
+
+            var model = await _classRepo.GetByClassDirector(Guid.Parse(userId));
             return View(model);
         }
         [Authorize(Roles = "Admin,Coordinator")]

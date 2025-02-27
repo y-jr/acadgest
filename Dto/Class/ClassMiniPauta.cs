@@ -10,6 +10,7 @@ namespace acadgest.Dto.Class
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public int Trimester { get; set; }
         public List<MiniPautaForView> MiniPautas { get; set; } = new();
     }
 }

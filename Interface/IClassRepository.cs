@@ -10,8 +10,9 @@ namespace acadgest.Interface
     public interface IClassRepository
     {
         public Task<List<Class>> GetAllAsync();
+        public Task<List<ClassDto>?> GetByClassDirector(Guid directorId);
         public Task<Class?> GetByIdAsync(Guid id);
-        public Task<ClassDetailsDto?> ClassDetailsAsync(Guid id);
+        public Task<ClassDetailsDto?> ClassDetailsAsync(Guid id, int trimestre);
         public Task<List<ClassDto>?> GetByCordAsync(Guid cordId);
         // public Task<List<ClassDto>?> GetByDirAsync(Guid dirId);
         public Task<Class?> CreateAsync(Class classModel);

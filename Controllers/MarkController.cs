@@ -20,9 +20,9 @@ namespace acadgest.Controllers
 
 
         [Route("{id}")]
-        public async Task<IActionResult> Index([FromRoute] Guid id)
+        public async Task<IActionResult> Index([FromRoute] Guid id, [FromQuery] int trim)
         {
-            var model = await _markRepo.GetMiniAsync(id);
+            var model = await _markRepo.GetMiniAsync(id, trim);
             return View(model);
         }
 
@@ -37,7 +37,6 @@ namespace acadgest.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin,Coordinator")]
         [Route("update")]
         public async Task<IActionResult> Update([FromForm] UpdateMiniPautaDto dto)
         {

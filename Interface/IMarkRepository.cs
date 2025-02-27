@@ -10,7 +10,7 @@ namespace acadgest.Interface
 {
     public interface IMarkRepository
     {
-        public Task<ClassMiniPauta?> GetMiniAsync(Guid subjectId);
+        public Task<ClassMiniPauta?> GetMiniAsync(Guid subjectId, int trim);
         public Task<List<string>> AddAsync(CreateMiniPautaDto miniPautaDto);
         public Task<bool> UpdateAsync(UpdateMiniPautaDto miniPautaDto);
         public Task<BoletimDto?> BoletimAsync(Guid pupilId);

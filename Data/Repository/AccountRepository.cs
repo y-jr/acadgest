@@ -160,6 +160,8 @@ namespace acadgest.Data.Repository
         // ---------------------------------------------LOGIN---------------------------------------------------
         public async Task<LoginResults> LoginAsync(LoginViewModel loginViewModel)
         {
+
+            await _signInManager.SignOutAsync();
             var result = await _signInManager.PasswordSignInAsync(
                 loginViewModel.Username,
                 loginViewModel.Password,

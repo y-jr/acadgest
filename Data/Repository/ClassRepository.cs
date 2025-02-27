@@ -20,7 +20,7 @@ namespace acadgest.Data.Repository
             _userManager = userManager;
         }
 
-        public async Task<ClassDetailsDto?> ClassDetailsAsync(Guid id)
+        public async Task<ClassDetailsDto?> ClassDetailsAsync(Guid id, int trim)
         {
             var turma = await _context.Classes
             .Include(c => c.ClassDirector)
@@ -33,6 +33,7 @@ namespace acadgest.Data.Repository
             var classDetail = new ClassDetailsDto
             {
                 Id = turma.Id,
+                Trimestre = trim,
                 Grade = turma.Grade,
                 Course = turma.Course?.Name ?? "",
                 Name = turma.Name,
@@ -56,7 +57,7 @@ namespace acadgest.Data.Repository
                     var mac = marks.FirstOrDefault(m =>
                                     m.PupilId == pupil?.Id &&
                                     m.SubjectId == subject.Id &&
-                                    m.Trimester == 1 &&
+                                    m.Trimester == trim &&
                                     m.year == 2025 &&
                                     m.test == "mac");
                     float myMac = mac?.Value ?? 0;
@@ -64,7 +65,7 @@ namespace acadgest.Data.Repository
                                 .FirstOrDefault(m =>
                                 m.PupilId == pupil?.Id &&
                                 m.SubjectId == subject.Id &&
-                                m.Trimester == 1 &&
+                                m.Trimester == trim &&
                                 m.year == 2025 &&
                                 m.test == "pp");
                     float myPp = pp?.Value ?? 0;
@@ -72,7 +73,7 @@ namespace acadgest.Data.Repository
                                 .FirstOrDefault(m =>
                                 m.PupilId == pupil?.Id &&
                                 m.SubjectId == subject.Id &&
-                                m.Trimester == 1 &&
+                                m.Trimester == trim &&
                                 m.year == 2025 &&
                                 m.test == "pt");
                     float myPt = pt?.Value ?? 0;
@@ -135,9 +136,7 @@ namespace acadgest.Data.Repository
                 var oldDirectorId = turma.ClassDirectorId;
                 if (oldDirectorId != null)
                 {
-                    turma.ClassDirectorId = directorId;
-                    await _context.SaveChangesAsync();
-                    // Pega o antigo coordenador
+                    // Pega o antigo diretor
                     var oldDirector = await _context.Users.FindAsync(oldDirectorId);
                     if (oldDirector != null)
                     {
@@ -154,6 +153,19 @@ namespace acadgest.Data.Repository
                         }
                     }
                 }
+                turma.ClassDirectorId = directorId;
+                // Pega o novo diretor
+                var newdDirector = await _context.Users.FindAsync(directorId);
+                // Adiciona a role de ClassDirector
+                if (newdDirector != null)
+                {
+                    var roles = await _userManager.GetRolesAsync(newdDirector);
+                    if (!roles.Contains("Classdirector"))
+                    {
+                        await _userManager.AddToRoleAsync(newdDirector, "Classdirector");
+                    }
+                }
+                await _context.SaveChangesAsync();
 
             }
             return turma;
@@ -162,6 +174,18 @@ namespace acadgest.Data.Repository
         public Task<Class?> UpdateAsync(Guid id, UpdateClassDto classDto)
         {
             throw new NotImplementedException();
+        }
+
+        async Task<List<ClassDto>?> IClassRepository.GetByClassDirector(Guid directorId)
+        {
+            var classes = await _context.Classes
+                        .Where(c => c.ClassDirectorId == directorId)
+                        .Include(c => c.ClassDirector)
+                        .ToListAsync();
+
+            if (classes == null) return null;
+            var classesDto = classes.Select(c => c.ToClassDto()).ToList();
+            return classesDto;
         }
     }
 }

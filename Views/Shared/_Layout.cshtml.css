@@ -11,6 +11,11 @@ a {
   color: #0077cc;
 }
 
+button.navbar-toggler{
+  /* position: absolute; */
+  /* background-color: #0077cc; */
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
