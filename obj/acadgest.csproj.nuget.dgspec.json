@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\acadgest.csproj": {}
+    "/home/yango/Documentos/dev/work/acadgest/acadgest.csproj": {}
   },
   "projects": {
-    "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\acadgest.csproj": {
+    "/home/yango/Documentos/dev/work/acadgest/acadgest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\acadgest.csproj",
+        "projectUniqueName": "/home/yango/Documentos/dev/work/acadgest/acadgest.csproj",
         "projectName": "acadgest",
-        "projectPath": "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\acadgest.csproj",
-        "packagesPath": "C:\\Users\\muieb\\.nuget\\packages\\",
-        "outputPath": "C:\\Yango\\Work\\syyt\\acadgest\\acadgest\\obj\\",
+        "projectPath": "/home/yango/Documentos/dev/work/acadgest/acadgest.csproj",
+        "packagesPath": "/home/yango/.nuget/packages/",
+        "outputPath": "/home/yango/Documentos/dev/work/acadgest/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\muieb\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/yango/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,21 +32,12 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Identity": {
-              "target": "Package",
-              "version": "[2.3.0, )"
-            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -55,17 +46,29 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.Design": {
+            "Microsoft.Data.SqlClient": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[6.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.Tools": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.5, )"
             },
             "Microsoft.Extensions.Identity.Core": {
               "target": "Package",
@@ -73,7 +76,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             },
             "QuestPDF": {
               "target": "Package",
@@ -99,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -160,7 +160,6 @@ namespace acadgest.Data.Repository
         // ---------------------------------------------LOGIN---------------------------------------------------
         public async Task<LoginResults> LoginAsync(LoginViewModel loginViewModel)
         {
-
             await _signInManager.SignOutAsync();
             var result = await _signInManager.PasswordSignInAsync(
                 loginViewModel.Username,
@@ -213,7 +212,7 @@ namespace acadgest.Data.Repository
 
             if (result.Succeeded)
             {
-                var resultRole = await _userManager.AddToRoleAsync(user, "User");
+                var resultRole = await _userManager.AddToRoleAsync(user, "Admin");
                 registerResults.SucceededRole = resultRole.Succeeded;
                 if (resultRole.Succeeded)
                 {

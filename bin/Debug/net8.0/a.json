@@ -1,26 +1,4 @@
-[
-  {
-    "id": "id",
-    "Name": "id",
-    "Mat": {
-      "IT": {
-        "MAC": 12,
-        "PP": 12,
-        "PT": 12,
-        "MT": 12
-      },
-      "IIT": {
-        "MAC": 12,
-        "PP": 12,
-        "PT": 12,
-        "MT": 12
-      },
-      "IIIT": {
-        "MAC": 12,
-        "PP": 12,
-        "PT": 12,
-        "MT": 12
-      }
-    }
-  }
-]
+ sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=P@rad0FicasBonit0" \
+   -p 1433:1433 --name sqlserveracad \
+   -v eschool:/var/opt/mssql \
+   -d mcr.microsoft.com/mssql/server:2022-latest

@@ -11,8 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // Configurar banco de dados
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Configurar banco de dados SQLite
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
+
 
 // Configurar Identity para usar GUID
 builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>(options =>
@@ -57,20 +62,37 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // Criar roles ao iniciar o aplicativo
+// Criar roles e seed data ao iniciar o aplicativo
+// Criar roles e seed data ao iniciar o aplicativo
 using (var scope = app.Services.CreateScope())
 {
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-
-    string[] roles = { "Admin", "User", "Coordinator", "Classdirector" };
-
-    foreach (var role in roles)
+    var services = scope.ServiceProvider;
+    try
     {
-        if (!await roleManager.RoleExistsAsync(role))
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        
+        // Criar roles
+        string[] roles = { "Admin", "User", "Coordinator", "Classdirector" };
+        foreach (var role in roles)
         {
-            await roleManager.CreateAsync(new IdentityRole<Guid> { Name = role });
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole<Guid> { Name = role });
+            }
         }
+        
+        // Chamar o inicializador de dados
+        await DbInitializer.Initialize(context, userManager);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Ocorreu um erro ao inicializar o banco de dados.");
     }
 }
+
 
 // Rotativa
 app.Run();

@@ -171,7 +171,7 @@ namespace acadgest.Data.Repository
                 var mac = await _context.Marks.FirstOrDefaultAsync(m =>
                 m.PupilId == pupil.Id &&
                 m.year == 2025 &&
-                m.Trimester == 1 &&
+                m.Trimester == 2 &&
                 m.SubjectId == subject.Id &&
                 m.test == "mac"
                 );
@@ -179,7 +179,7 @@ namespace acadgest.Data.Repository
                 var pp = await _context.Marks.FirstOrDefaultAsync(m =>
                 m.PupilId == pupil.Id &&
                 m.year == 2025 &&
-                m.Trimester == 1 &&
+                m.Trimester == 2 &&
                 m.SubjectId == subject.Id &&
                 m.test == "pp"
                 );
@@ -187,7 +187,7 @@ namespace acadgest.Data.Repository
                 var pt = await _context.Marks.FirstOrDefaultAsync(m =>
                 m.PupilId == pupil.Id &&
                 m.year == 2025 &&
-                m.Trimester == 1 &&
+                m.Trimester == 2 &&
                 m.SubjectId == subject.Id &&
                 m.test == "pt"
                 );

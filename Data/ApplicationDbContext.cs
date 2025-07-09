@@ -22,58 +22,85 @@ namespace acadgest.Data
                         base.OnModelCreating(builder);
 
                         // Coordenador
-                        builder.Entity<AppUser>()
-                                .HasMany(u => u.Coordenations)
-                                .WithOne(c => c.Coordinator)
-                                .HasForeignKey(c => c.CoordinatorId)
-                                .OnDelete(DeleteBehavior.SetNull);
+                        builder.Entity<AppUser>(entity =>
+                        {
+                                entity.Property(u => u.Name).HasMaxLength(100);
 
-                        // Diretor de turma
-                        builder.Entity<AppUser>()
-                                .HasMany(u => u.Classes)
-                                .WithOne(c => c.ClassDirector)
-                                .HasForeignKey(c => c.ClassDirectorId)
-                                .OnDelete(DeleteBehavior.SetNull);
+                                entity.HasMany(u => u.Coordenations)
+                                      .WithOne(c => c.Coordinator)
+                                      .HasForeignKey(c => c.CoordinatorId)
+                                      .OnDelete(DeleteBehavior.Restrict);
+                                entity.HasMany(u => u.Classes)
+                                      .WithOne(c => c.ClassDirector)
+                                      .HasForeignKey(c => c.ClassDirectorId)
+                                      .OnDelete(DeleteBehavior.Restrict);
+                        });
 
-                        // Cursos da coordenação
-                        builder.Entity<Coordenation>()
-                                .HasMany(c => c.Courses)
-                                .WithOne(c => c.Coordenation)
-                                .HasForeignKey(c => c.CoordenationId)
-                                .OnDelete(DeleteBehavior.SetNull);
+                        builder.Entity<Coordenation>(entity =>
+                        {
+                                entity.Property(c => c.Name).HasMaxLength(100);
 
-                        // Turmas da coordenação
-                        builder.Entity<Coordenation>()
-                                .HasMany(c => c.Classes)
-                                .WithOne(c => c.Coordenation)
-                                .HasForeignKey(c => c.CoordenationId)
-                                .OnDelete(DeleteBehavior.SetNull);
+                                // Cursos da coordenação
+                                entity.HasMany(c => c.Courses)
+                                      .WithOne(c => c.Coordenation)
+                                      .HasForeignKey(c => c.CoordenationId)
+                                      .OnDelete(DeleteBehavior.Restrict);
 
+                                // Turmas da coordenação
+                                entity.HasMany(c => c.Classes)
+                                      .WithOne(c => c.Coordenation)
+                                      .HasForeignKey(c => c.CoordenationId)
+                                      .OnDelete(DeleteBehavior.Restrict);
+                        });
                         // Turmas do curso
-                        builder.Entity<Course>()
-                                .HasMany(c => c.Classes)
-                                .WithOne(c => c.Course)
-                                .HasForeignKey(c => c.CourseId)
-                                .OnDelete(DeleteBehavior.SetNull);
+                        builder.Entity<Course>(entity =>
+                        {
+                                entity.Property(c => c.Name).HasMaxLength(100);
 
-                        // Alunos da turma
-                        builder.Entity<Class>()
-                                .HasMany(c => c.pupils)
-                                .WithOne(p => p.Class)
-                                .HasForeignKey(p => p.ClassId)
-                                .OnDelete(DeleteBehavior.SetNull);
-                        // Cadeiras da turma
-                        builder.Entity<Class>()
-                                .HasMany(c => c.Subjects)
-                                .WithOne(s => s.Class)
-                                .HasForeignKey(s => s.ClassId)
-                                .OnDelete(DeleteBehavior.SetNull);
-                        // Notas do aluno
-                        builder.Entity<Pupil>()
-                                .HasMany(p => p.Marks)
-                                .WithOne(m => m.Pupil)
-                                .HasForeignKey(m => m.PupilId)
-                                .OnDelete(DeleteBehavior.Cascade);
+                                entity.HasMany(c => c.Classes)
+                                      .WithOne(c => c.Course)
+                                      .HasForeignKey(c => c.CourseId)
+                                      .OnDelete(DeleteBehavior.Restrict);
+                        });
+                        builder.Entity<Class>(entity =>
+                        {
+                                entity.Property(c => c.Name).HasMaxLength(100);
+
+                                // Alunos da turma
+                                entity.HasMany(c => c.pupils)
+                                      .WithOne(p => p.Class)
+                                      .HasForeignKey(p => p.ClassId)
+                                      .OnDelete(DeleteBehavior.Restrict);
+                                // Cadeiras da turma
+                                entity.HasMany(c => c.Subjects)
+                                      .WithOne(s => s.Class)
+                                      .HasForeignKey(s => s.ClassId)
+                                      .OnDelete(DeleteBehavior.Restrict);
+                        });
+
+                        builder.Entity<Pupil>(entity =>
+                        {
+                                entity.Property(p => p.Name).HasMaxLength(100);
+
+                                // Notas do aluno
+                                entity.HasMany(p => p.Marks)
+                                      .WithOne(m => m.Pupil)
+                                      .HasForeignKey(m => m.PupilId)
+                                      .OnDelete(DeleteBehavior.Cascade);
+                        });
+
+                        builder.Entity<Subject>(entity =>
+                        {
+                                entity.Property(s => s.Name).HasMaxLength(100);
+                                entity.Property(s => s.Grade).HasMaxLength(20);
+                        });
+                        builder.Entity<Mark>(entity =>
+                        {
+                                entity.Property(m => m.test).HasMaxLength(100);
+                                entity.Property(m => m.Value).HasColumnType("REAL");
+                        });
+
+
 
                 }
 

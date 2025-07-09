@@ -43,7 +43,7 @@ namespace acadgest.Views.Document
                     .Column(Column =>
                     {
                         Column.Item().AlignCenter()
-                        .Text("Boletim de notas do Iº Trimestre - 2024-2025")
+                        .Text("Boletim de notas do IIº Trimestre - 2024-2025")
                         .FontSize(11);
                         Column.Item().Height(10);
                         Column.Item().AlignLeft()
@@ -122,7 +122,7 @@ namespace acadgest.Views.Document
                                 table.Cell().ColumnSpan(3).Background("#46f8ff").Height(16).AlignMiddle().Text("Média geral").FontSize(10).AlignLeft();
                                 if ((mg / count) >= 15)
                                 {
-                                    table.Cell().ColumnSpan(2).Background("#2fff36").Height(16).AlignMiddle().Text($"{(mg / count)}:0.0").FontSize(10).AlignCenter();
+                                    table.Cell().ColumnSpan(2).Background("#2fff36").Height(16).AlignMiddle().Text($"{(mg / count):0.0}").FontSize(10).AlignCenter();
                                     table.Cell().Background("#2fff36").Height(16).AlignMiddle().Text($"{(((mg / count) / 20) * 100):0.0} %").FontSize(10).AlignCenter();
                                 }
                                 else if ((mg / count) >= 12)
